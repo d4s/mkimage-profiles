@@ -116,8 +116,3 @@ use/live/evm: use/live/hooks use/live/desktop
 	@$(Call add,LIVE_KMODULES,kvm virtualbox)
 	@$(call add,CLEANUP_PACKAGES,'kernel-modules-drm-nouveau*')
 
-# eth0 instead of enp0s3
-use/live/net-eth: use/live
-	@$(call add,STAGE1_PACKAGES,udev-rule-generator-net)
-	@$(call add,STAGE2_PACKAGES,udev-rule-generator-net livecd-net-eth)
-
