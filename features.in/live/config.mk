@@ -6,8 +6,9 @@ use/live: use/stage2 sub/stage2@live
 	@$(call add_feature)
 	@$(call add,CLEANUP_PACKAGES,'installer*')
 
-use/live/base: use/live use/syslinux/ui/menu
+use/live/base: use/live use/syslinux/ui/menu use/live/hooks
 	@$(call add,LIVE_LISTS,$(call tags,base && (live || network)))
+	@$(call add,LIVE_PACKAGES,remount_rw)
 
 # a very simplistic one
 use/live/x11: use/live use/firmware use/x11/xorg
