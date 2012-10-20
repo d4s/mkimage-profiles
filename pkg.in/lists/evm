@@ -1,0 +1,143 @@
+# KDE4
+kde4
+kde4-devel
+
+# for clustering
+bind-utils
+ntpdate
+openmpi
+openmpi-devel
+torque-mom
+torque-client
+
+openssh-clients
+
+rsync
+openssh-server
+sudo
+
+lxc
+bluez
+
+# emulators
+dosbox
+aqemu
+qemu
+qemu-kvm
+virtualbox
+
+# editors
+nano
+xemacs-*
+
+vim-enhanced
+vim-spell-en
+vim-spell-ru-lebedev
+vimtutor
+#vim-X11
+vim-plugin-*
+
+### EVM section begin
+
+# Developer
+
+kernel-headers-modules-std-def
+kernel-headers-std-def
+
+ccache
+
+man-pages*
+
+libncurses-devel
+
+qt-creator*
+libqt4-*
+cmake-gui
+phonon-devel
+
+libSDL*
+
+unixODBC*
+
+# Eclipse
+eclipse-pde
+eclipse-rcp
+eclipse-demos
+
+eclipse-cdt*
+eclipse-demos
+eclipse-egit
+eclipse-gef*
+eclipse-changelog
+eclipse-quickrex
+eclipse-phpeclipse
+
+eclipse-nls-ru
+
+# Netbeans
+netbeans-*
+
+# version control
+git
+git-gui
+gitk
+git-cvs
+git-doc
+git-svn
+
+subversion
+subversion-tools
+
+mercurial
+
+# python
+eric4
+
+# erlang
+erlang-full
+erlang-doc*
+
+# haskell
+ghc7.4.2-full
+
+# GO
+gcc4.7-go
+
+
+# Office
+djvu-viewer
+mozilla-plugin-djvu
+
+hunspell-ru-lebedev
+libreoffice-langpack-ru
+libreoffice
+
+# net
+nmap
+tcpdump
+tshark
+wireshark*
+traceroute
+
+iptables
+iptables-ipv6
+iptables-devel
+
+ftp
+lftp
+wget
+curl
+telnet
+netcat
+gtknetcat
+
+ethtool
+
+# Management
+italc2
+italc2-master
+italc2-client
+
+# tools
+putty
+htop
