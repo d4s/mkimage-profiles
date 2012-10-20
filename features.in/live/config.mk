@@ -6,9 +6,8 @@ use/live: use/stage2 sub/stage2@live
 	@$(call add_feature)
 	@$(call add,CLEANUP_PACKAGES,'installer*')
 
-use/live/base: use/live use/syslinux/ui/menu use/live/hooks
+use/live/base: use/live use/syslinux/ui/menu
 	@$(call add,LIVE_LISTS,$(call tags,base && (live || network)))
-	@$(call add,LIVE_PACKAGES,remount_rw)
 
 # a very simplistic one
 use/live/x11: use/live use/firmware use/x11/xorg
@@ -53,3 +52,13 @@ use/live/ru: use/live
 
 use/live/sound: use/live
 	@$(call add,LIVE_PACKAGES,amixer alsa-utils aplay udev-alsa)
+
+use/live/evm: use/live/hooks use/live/desktop
+	@$(call add,LIVE_PACKAGES,remount_rw)
+	@$(call add,LIVE_PACKAGES,livecd-save-nfs)
+	@$(call add,LIVE_LISTS,evm)
+	@$(call add,LIVE_LISTS,gns3)
+	@$(call add,LIVE_LISTS, $(call tags,(base || extra) && (archive || rescue || network)))
+	@$(call add,LIVE_KMODULES,kvm virtualbox)
+	@$(call add,CLEANUP_PACKAGES,'kernel-modules-drm-nouveau*')
+

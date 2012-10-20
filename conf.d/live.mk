@@ -78,4 +78,6 @@ distro/live-gimp: distro/live-icewm use/x11/3d-free use/live/ru
 	@$(call add,LIVE_PACKAGES,qtfm openssh-clients rsync)
 	@$(call add,LIVE_PACKAGES,design-graphics-sisyphus2)
 
+distro/live-evm: distro/.live-desktop use/live/autologin use/x11/3d-proprietary use/live/evm
+	@$(call try,HOMEPAGE,http://bsuir.by)
 endif
