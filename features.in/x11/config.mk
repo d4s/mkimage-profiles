@@ -1,7 +1,7 @@
 +icewm: use/x11/icewm; @:
 +razorqt: use/x11/razorqt use/x11/lightdm/qt; @:
 +tde: use/x11/tde use/x11/kdm; @:
-+kde: use/x11/kde use/x11/kdm4; @:
++kde4-lite: use/x11/kde4-lite use/x11/kdm4; @:
 
 use/x11/xorg:
 	@$(call add_feature)
@@ -16,7 +16,7 @@ use/x11/drm: use/x11/xorg
 use/x11/3d-free: use/x11/drm
 	@$(call add,THE_KMODULES,drm-nouveau)
 
-### fglrx is broken with xorg-1.12 so far
+### fglrx is broken with xorg-1.13 so far
 use/x11/3d-proprietary: use/x11/xorg
 	@$(call add,THE_KMODULES,fglrx nvidia)
 	@$(call add,THE_PACKAGES,nvidia-settings nvidia-xconfig)
@@ -52,8 +52,8 @@ use/x11/razorqt: use/x11/xorg
 use/x11/tde: use/x11/xorg
 	@$(call add,THE_LISTS,$(call tags,tde desktop))
 
-use/x11/kde: use/x11/xorg
-	@$(call add,THE_LISTS,$(call tags,kde desktop))
+use/x11/kde4-lite: use/x11/xorg
+	@$(call add,THE_LISTS,$(call tags,kde4 desktop))
 
 use/x11/kde4: use/x11/xorg
 	@$(call add,THE_PACKAGES,kde4-default)
@@ -72,3 +72,6 @@ use/x11/e17: use/x11/xorg use/x11/3d-free
 
 use/x11/lxde: use/x11/xorg
 	@$(call add,THE_LISTS,$(call tags,lxde desktop))
+
+use/x11/fvwm: use/x11/xorg
+	@$(call add,THE_LISTS,$(call tags,fvwm desktop))

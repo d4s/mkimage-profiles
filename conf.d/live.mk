@@ -7,11 +7,12 @@ distro/syslinux: distro/.init \
 	use/syslinux/localboot.cfg use/syslinux/ui/vesamenu use/hdt; @:
 
 distro/.live-base: distro/.base use/live/base use/power/acpi/button; @:
-distro/.live-desktop: distro/.base +live use/plymouth/live; @:
+distro/.live-desktop: distro/.base +live use/live/install use/live/net-eth \
+	use/plymouth/live use/efi; @:
 distro/.live-desktop-ru: distro/.live-desktop use/live/ru; @:
 
-distro/.live-kiosk: distro/.base use/live/base use/live/autologin \
-	use/syslinux/timeout/1 use/cleanup +power
+distro/.live-kiosk: distro/.base use/live/base use/live/autologin +power \
+	use/syslinux/timeout/1 use/cleanup use/efi/signed use/live/net-eth
 	@$(call add,LIVE_PACKAGES,fonts-ttf-dejavu)
 	@$(call add,CLEANUP_PACKAGES,'alterator*' 'guile*' 'vim-common')
 
@@ -31,9 +32,10 @@ distro/live-builder: distro/live-builder-mini use/dev/repo
 distro/live-install: distro/.live-base use/live/textinstall; @:
 distro/.livecd-install: distro/.live-base use/live/install; @:
 
-distro/live-icewm: distro/.live-desktop use/live/autologin +icewm; @:
-distro/live-razorqt: distro/.live-desktop use/live/autologin +razorqt; @:
+distro/live-icewm: distro/.live-desktop use/x11/lightdm/gtk +icewm; @:
+distro/live-razorqt: distro/.live-desktop +razorqt; @:
 distro/live-tde: distro/.live-desktop-ru use/live/install +tde; @:
+distro/live-fvwm: distro/.live-desktop-ru use/x11/lightdm/gtk use/x11/fvwm; @:
 
 distro/live-rescue: distro/live-icewm use/efi
 	@$(call add,LIVE_LISTS,$(call tags,rescue && (fs || live || x11)))
@@ -42,9 +44,9 @@ distro/live-rescue: distro/live-icewm use/efi
 
 distro/live-webkiosk-mini: distro/.live-kiosk use/live/hooks use/live/ru
 	@$(call add,LIVE_LISTS,$(call tags,desktop && (live || network)))
-	@$(call add,LIVE_PACKAGES,livecd-webkiosk)
+	@$(call add,LIVE_PACKAGES,livecd-webkiosk-firefox)
 	@$(call add,CLEANUP_PACKAGES,'libqt4*' 'qt4*')
-	@$(call set,KFLAVOURS,led-ws)
+	@#$(call set,KFLAVOURS,led-ws)
 
 # NB: flash/java plugins are predictable security holes
 distro/live-webkiosk-flash: distro/live-webkiosk-mini use/plymouth/live +vmguest

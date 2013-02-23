@@ -8,15 +8,12 @@ BOOT_SYSI := $(META_SYSTEM_ID)
 BOOT_PUBL := $(META_PUBLISHER)
 BOOT_PREP := $(META_PREPARER)
 BOOT_APPI := $(META_APP_ID)
-BOOT_VOLI := $(META_VOL_ID)
+BOOT_VOLI := $(shell echo $(META_VOL_ID) | cut -c1-32)
 BOOT_VOLS := $(META_VOL_SET)
 BOOT_BIBL := $(META_BIBLIO)
 BOOT_ABST := $(META_ABSTRACT)
 
 BOOT_TYPE := isolinux
-
-# see also ../scripts.d/01-isosort; needs mkimage-0.2.2+
-MKI_SORTFILE := /tmp/isosort
 
 all: $(GLOBAL_DEBUG) prep copy-subdirs copy-tree run-scripts pack-image \
 	postprocess $(GLOBAL_CLEAN_WORKDIR)

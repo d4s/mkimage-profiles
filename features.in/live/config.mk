@@ -14,7 +14,8 @@ use/live/x11: use/live use/firmware use/x11/xorg
 	@$(call add,LIVE_PACKAGES,xinit)
 
 # optimized out: use/x11/xorg
-use/live/desktop: use/live/base use/x11/wacom use/live/sound +vmguest +power
+use/live/desktop: use/live/base use/x11/wacom use/live/sound \
+	+vmguest +power +efi
 	@$(call add,LIVE_LISTS,$(call tags,desktop && (live || network)))
 	@$(call add,LIVE_LISTS,$(call tags,base l10n))
 	@$(call add,LIVE_PACKAGES,fonts-ttf-dejavu fonts-ttf-droid)
@@ -52,6 +53,11 @@ use/live/ru: use/live
 
 use/live/sound: use/live
 	@$(call add,LIVE_PACKAGES,amixer alsa-utils aplay udev-alsa)
+
+# eth0 instead of enp0s3
+use/live/net-eth: use/live
+	@$(call add,STAGE1_PACKAGES,udev-rule-generator-net)
+	@$(call add,STAGE2_PACKAGES,udev-rule-generator-net livecd-net-eth)
 
 use/live/evm: use/live/hooks use/live/desktop
 	@$(call add,LIVE_PACKAGES,remount_rw)

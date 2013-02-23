@@ -65,7 +65,7 @@ profile/init: distclean
 		fi >&2; \
 		exit 1; \
 	fi; \
-	mp-commit "$(BUILDDIR)" "derivative profile initialized"; \
+	mp-commit -i "$(BUILDDIR)" "derivative profile initialized"; \
 	if [ -w . ]; then \
 		rm -f "$(SYMLINK)" && \
 		ln -s "$(BUILDDIR)" "$(SYMLINK)" && \
@@ -82,8 +82,8 @@ profile/bare: profile/init
 	} >&2
 	@$(call try,MKIMAGE_PREFIX,/usr/share/mkimage)
 	@$(call try,GLOBAL_VERBOSE,)
-	@$(call try,IMAGEDIR,$(IMAGEDIR))
-	@$(call try,LOGDIR,$(LOGDIR))
+	@$(call try,IMAGEDIR,$(wildcard $(IMAGEDIR)))
+	@$(call try,LOGDIR,$(wildcard $(LOGDIR)))
 	@$(call try,BRANDING,altlinux-sisyphus)
 ifeq (,$(REPO:altlinux%=))
 	@$(call set,IMAGE_INIT_LIST,+branding-$$(BRANDING)-release)

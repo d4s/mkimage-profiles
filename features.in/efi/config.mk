@@ -1,3 +1,5 @@
++efi: use/efi; @:
+
 ifeq (x86_64,$(ARCH))
 
 EFI_LISTS := $(call tags,base efi)
@@ -9,7 +11,7 @@ use/efi:
 	@$(call add,RESCUE_LISTS,$(EFI_LISTS))
 	@$(call add,THE_PACKAGES,$$(EFI_SHELL))
 	@$(call add,RESCUE_PACKAGES,refind $$(EFI_SHELL))
-	@$(call add,INSTALL2_PACKAGES,dosfstools)
+	@$(call add,INSTALL2_PACKAGES,dosfstools fatresize)
 	@$(call try,EFI_BOOTLOADER,elilo)	# default one
 
 use/efi/refind: use/efi
@@ -17,6 +19,7 @@ use/efi/refind: use/efi
 
 use/efi/signed: use/efi
 	@$(call set,EFI_CERT,altlinux)
+	@$(call add,THE_PACKAGES,shim-signed)
 	@$(call set,EFI_SHELL,efi-shell-signed)	# even more useful
 	@$(call add,RESCUE_PACKAGES,refind-signed)
 	@$(call add,RESCUE_PACKAGES,openssl sbsigntools)
