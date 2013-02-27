@@ -5,6 +5,8 @@
 use/firmware:
 	@$(call add_feature)
 	@$(call add,SYSTEM_PACKAGES,firmware-linux)
+
+use/firmware/cpu: use/firmware
 	@$(call add,THE_PACKAGES,firmware-amd-ucode)
 	@$(call add,THE_PACKAGES,microcode-data-intel microcode_ctl)
 
@@ -25,3 +27,6 @@ use/firmware/wireless: use/firmware
 	@#$(call add,THE_PACKAGES_REGEXP,firmware-iwl.*)
 	@#$(call add,THE_PACKAGES_REGEXP,firmware-rt.*)
 	@$(call add,THE_PACKAGES_REGEXP,firmware-zd.*)
+
+use/firmware/laptop: use/firmware/wireless use/firmware/cpu
+	@$(call add,KMODULES,acpi_call)

@@ -9,16 +9,16 @@ distro/server-nano: distro/.server-base \
 	@$(call add,BASE_LISTS,$(call tags,server network))
 	@$(call add,BASE_PACKAGES,dhcpcd cpio)
 
-distro/server-mini: distro/.server-base use/server/mini \
+distro/server-mini: distro/.server-base use/server/mini use/kernel/net \
 	use/cleanup/x11-alterator use/efi
 	@$(call add,BASE_PACKAGES,make-initrd-mdadm make-initrd-lvm)
 
 distro/server-ovz: distro/server-mini use/install2/net use/hdt use/rescue \
-	use/firmware/server use/firmware/wireless use/power/acpi/button
+	use/firmware/server use/firmware/cpu use/power/acpi/button +wireless
 	@$(call set,STAGE1_KFLAVOUR,std-def)
 	@$(call set,KFLAVOURS,std-def ovz-el)
-	@$(call add,BASE_KMODULES,rtl8168 rtl8192)
-	@$(call add,MAIN_KMODULES,ipset ipt-netflow opendpi pf_ring xtables-addons)
+	@$(call add,MAIN_KMODULES,ipset ipt-netflow opendpi pf_ring)
+	@$(call add,MAIN_KMODULES,xtables-addons)	# t6/branch
 	@$(call add,MAIN_KMODULES,drbd83 kvm)
 	@$(call add,BASE_LISTS,ovz-server)
 	@$(call add,MAIN_GROUPS,dns-server http-server ftp-server kvm-server)

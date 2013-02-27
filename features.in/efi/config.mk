@@ -18,6 +18,7 @@ use/efi/refind: use/efi
 	@$(call set,EFI_BOOTLOADER,refind)
 
 use/efi/signed: use/efi
+	@$(call set,MKI_VER_MINIMAL,0.2.7)	# refind->elilo handoff
 	@$(call set,EFI_CERT,altlinux)
 	@$(call add,THE_PACKAGES,shim-signed)
 	@$(call set,EFI_SHELL,efi-shell-signed)	# even more useful
@@ -25,7 +26,7 @@ use/efi/signed: use/efi
 	@$(call add,RESCUE_PACKAGES,openssl sbsigntools)
 
 use/efi/shell: use/efi
-	@$(call set,EFI_SHELL,efi-shell)
+	@$(call try,EFI_SHELL,efi-shell)
 
 use/efi/debug: use/efi
 	@$(call add,STAGE2_PACKAGES,efibootmgr gdisk)
