@@ -113,5 +113,6 @@ use/live/evm: use/live/hooks use/live/desktop
 	@$(call add,LIVE_LISTS,evm)
 	@$(call add,LIVE_LISTS,gns3)
 	@$(call add,LIVE_LISTS, $(call tags,(base || extra) && (archive || rescue || network)))
-	@$(call add,LIVE_KMODULES,kvm virtualbox)
+	@$(Call add,LIVE_KMODULES,kvm virtualbox)
 	@$(call add,CLEANUP_PACKAGES,'kernel-modules-drm-nouveau*')
+
