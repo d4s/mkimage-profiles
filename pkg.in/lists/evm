@@ -1,15 +1,10 @@
 # KDE4
 kde4
 kde4-devel
+kde4-i18n-ru
 
-# for clustering
-bind-utils
-ntpdate
-openmpi
-openmpi-devel
-torque-mom
-torque-client
-
+# system
+xdg-user-dirs
 openssh-clients
 
 rsync
@@ -40,9 +35,6 @@ vim-plugin-*
 ### EVM section begin
 
 # Developer
-
-kernel-headers-modules-std-def
-kernel-headers-std-def
 
 ccache
 
@@ -86,7 +78,7 @@ git-doc
 git-svn
 
 subversion
-subversion-tools
+#subversion-tools
 
 mercurial
 
@@ -98,11 +90,13 @@ erlang-full
 erlang-doc*
 
 # haskell
-ghc7.4.2-full
+ghc7.6.1-full
 
 # GO
 gcc4.7-go
 
+# OpenMP
+libgomp4.7-devel
 
 # Office
 djvu-viewer
@@ -138,6 +132,13 @@ italc2
 italc2-master
 italc2-client
 
+
 # tools
 putty
 htop
+multipath-tools
+
+# other
+itest
+synaptic
+

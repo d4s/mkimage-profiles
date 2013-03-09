@@ -1,0 +1,18 @@
+# stage2 mod: livecd
+
+STAGE2_KMODULES = $(THE_KMODULES) $(LIVE_KMODULES)
+
+IMAGE_PACKAGES_REGEXP = $(THE_PACKAGES_REGEXP) \
+			$(LIVE_PACKAGES_REGEXP)
+
+IMAGE_PACKAGES = $(call map,list, \
+			$(THE_LISTS) $(THE_GROUPS) \
+			$(LIVE_LISTS) $(LIVE_GROUPS)) \
+		 $(COMMON_PACKAGES) $(THE_PACKAGES) $(LIVE_PACKAGES) \
+		 interactivesystem
+
+MKI_PACK_RESULTS = squash:live
+
+debug::
+	@echo "** live: IMAGE_PACKAGES: $(IMAGE_PACKAGES)"
+	@echo "** live: IMAGE_PACKAGES_REGEXP: $(IMAGE_PACKAGES_REGEXP)"
