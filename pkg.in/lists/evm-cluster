@@ -1,0 +1,79 @@
+# kernel for cluster
+kernel-modules-ipmi-led-ws
+kernel-modules-infiniband-led-ws
+
+kernel-headers-modules-led-ws
+kernel-headers-led-ws
+
+
+# Cluster tools
+bind-utils
+ntpdate
+openmpi
+openmpi-devel
+torque-mom
+torque-client
+
+
+# system
+xdg-user-dirs
+openssh-clients
+
+rsync
+openssh-server
+sudo
+
+lxc
+
+vim-enhanced
+vim-spell-en
+vim-spell-ru-lebedev
+#vim-X11
+vim-plugin-*
+
+
+# Developer
+
+ccache
+
+# version control
+git
+git-cvs
+git-svn
+
+subversion
+#subversion-tools
+
+
+# OpenMP
+libgomp4.7-devel
+
+# net
+nmap
+tcpdump
+traceroute
+
+iptables
+iptables-ipv6
+iptables-devel
+
+lftp
+wget
+curl
+telnet
+netcat
+
+ethtool
+
+# Cuda
+perl-Tie-File
+gcc4.6
+gcc4.6-c++
+gcc4.6-fortran
+gcc4.6-java
+gcc4.6-objc++
+gcc4.6-objc
+# Cuda samples
+libgomp4.6-devel
+libGLUT-devel
+libXmu-devel
