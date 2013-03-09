@@ -58,13 +58,3 @@ use/live/sound: use/live
 use/live/net-eth: use/live
 	@$(call add,STAGE1_PACKAGES,udev-rule-generator-net)
 	@$(call add,STAGE2_PACKAGES,udev-rule-generator-net livecd-net-eth)
-
-use/live/evm: use/live/hooks use/live/desktop
-	@$(call add,LIVE_PACKAGES,remount_rw)
-	@$(call add,LIVE_PACKAGES,livecd-save-nfs)
-	@$(call add,LIVE_LISTS,evm)
-	@$(call add,LIVE_LISTS,gns3)
-	@$(call add,LIVE_LISTS, $(call tags,(base || extra) && (archive || rescue || network)))
-	@$(call add,LIVE_KMODULES,kvm virtualbox)
-	@$(call add,CLEANUP_PACKAGES,'kernel-modules-drm-nouveau*')
-
