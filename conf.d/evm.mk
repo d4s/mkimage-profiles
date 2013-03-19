@@ -4,8 +4,8 @@ distro/live-evm-desktop: distro/.live-desktop-ru use/live/autologin use/x11/3d-p
 	@$(call try,HOMEPAGE,http://bsuir.by)
 	@$(call try,HOMENAME,BSUIR)
 
-distro/live-evm-cluster: distro/.live-base use/evm/cluster use/relname
-	@$(call set,KFLAVOURS,led-ws)
+distro/live-evm-cluster: distro/.live-base use/evm/cluster use/evm/devel use/relname
+	@$(call set,KFLAVOURS,std-def)
 	@$(call try,HOMEPAGE,http://bsuir.by)
 	@$(call try,HOMENAME,BSUIR)
 	@$(call set,RELNAME,EVM-Cluster)

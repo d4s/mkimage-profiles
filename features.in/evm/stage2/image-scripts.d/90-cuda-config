@@ -5,8 +5,8 @@ echo Changes for CUDA
 [ -f /etc/vmware/not_configured ] && rm -f /etc/vmware/not_configured
 
 mkdir -p /opt/cuda
-curl ftp://192.168.11.180/cluster/root/cuda-installed-5.0.35.tar.gz | tar -C /opt/cuda -xz 
-curl ftp://192.168.11.180/cluster/root/cuda-libs.tar.gz | tar -C / -xz
+#curl ftp://192.168.11.180/cluster/root/cuda-installed-5.0.35.tar.gz | tar -C /opt/cuda -xz 
+#curl ftp://192.168.11.180/cluster/root/cuda-libs.tar.gz | tar -C / -xz
 
 
-depmod -a
+#depmod -a

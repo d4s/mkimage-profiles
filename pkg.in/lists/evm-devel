@@ -1,0 +1,85 @@
+lxc
+
+vim-enhanced
+vim-spell-en
+vim-spell-ru-lebedev
+vim-plugin-*
+
+
+# alt-devel
+appliance-devel-alt
+appliance-devel-rpm-build
+appliance-devel-base
+appliance-devel-debug
+
+
+### EVM section begin
+
+# Debug&profiling
+strace
+ltrace
+gdb
+valgrind
+oprofile
+
+# Developer
+
+ccache
+man-pages*
+
+clang
+clang-analyzer
+
+java-devel-default
+
+
+# Libs
+libncurses-devel
+
+
+# version control
+git
+git-cvs
+git-doc
+git-svn
+
+subversion
+
+mercurial
+
+# python
+
+# erlang
+erlang-full
+erlang-doc*
+
+# haskell
+ghc7.6.1-full
+
+# GO
+gcc4.7-go
+
+# OpenMP
+libgomp4.7-devel
+
+# net
+nmap
+tcpdump
+traceroute
+
+iptables
+iptables-ipv6
+iptables-devel
+
+lftp
+wget
+curl
+telnet
+netcat
+
+ethtool
+
+# tools
+htop
+multipath-tools
+
