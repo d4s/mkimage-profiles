@@ -1,4 +1,4 @@
-use/evm: 
+use/evm: use/live/hooks
 	@$(call add_feature)
 	@$(call add,LIVE_PACKAGES,livecd-save-nfs)
 	@$(call add,LIVE_KMODULES,kvm)
@@ -7,8 +7,11 @@ use/evm:
 	@$(call set,META_VOL_ID,BSUIR EVM $(IMAGE_NAME)/$(ARCH))
 	@$(call set,META_VOL_SET,BSUIR EVM)
 
-use/evm/cluster: use/live/hooks use/evm
+use/evm/cluster: use/evm
 	@$(call add,LIVE_LISTS,evm-cluster)
+
+use/evm/devel: use/evm
+	@$(call add,LIVE_LISTS,evm-devel)
 
 use/evm/desktop: use/evm use/live/desktop
 	@$(call add,LIVE_LISTS, $(call tags,(base || extra) && (archive || rescue || network)))

@@ -1,9 +1,6 @@
-# kernel for cluster
-kernel-modules-ipmi-led-ws
-kernel-modules-infiniband-led-ws
-
-kernel-headers-modules-led-ws
-kernel-headers-led-ws
+vim-enhanced
+vim-spell-en
+vim-spell-ru-lebedev
 
 
 # Cluster tools
@@ -14,6 +11,7 @@ openmpi-devel
 torque-mom
 torque-client
 
+infiniband-diags
 
 # system
 xdg-user-dirs
@@ -22,31 +20,12 @@ openssh-clients
 rsync
 openssh-server
 sudo
+su
 
 lxc
 
-vim-enhanced
-vim-spell-en
-vim-spell-ru-lebedev
-#vim-X11
-vim-plugin-*
-
-
-# Developer
-
-ccache
-
-# version control
-git
-git-cvs
-git-svn
-
-subversion
-#subversion-tools
-
-
 # OpenMP
-libgomp4.7-devel
+libgomp4.6-devel
 
 # net
 nmap
