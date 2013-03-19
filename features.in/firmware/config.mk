@@ -6,6 +6,8 @@ use/firmware:
 	@$(call add_feature)
 	@$(call add,SYSTEM_PACKAGES,firmware-linux)
 
+use/firmware/full: use/firmware/server use/firmware/laptop
+
 use/firmware/cpu: use/firmware
 	@$(call add,THE_PACKAGES,firmware-amd-ucode)
 	@$(call add,THE_PACKAGES,microcode-data-intel microcode_ctl)
@@ -21,7 +23,7 @@ use/firmware/wireless: use/firmware
 	@$(call add,THE_KMODULES,bcmwl ndiswrapper)
 	@$(call add,THE_PACKAGES,firmware-acx100)
 	@#$(call add,THE_PACKAGES,firmware-i2400m)
-	@$(call add,THE_PACKAGES_REGEXP,firmware-carl9170.*)
+	@#$(call add,THE_PACKAGES_REGEXP,firmware-carl9170.*)
 	@$(call add,THE_PACKAGES_REGEXP,firmware-prism.*)
 	@$(call add,THE_PACKAGES_REGEXP,firmware-ipw.*)
 	@#$(call add,THE_PACKAGES_REGEXP,firmware-iwl.*)

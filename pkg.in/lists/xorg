@@ -10,13 +10,12 @@ xorg-drv-modesetting
 xorg-drv-multimedia
 xorg-drv-nouveau
 xorg-drv-nv
-xorg-drv-s3
+#xorg-drv-s3
 xorg-drv-s3virge
 xorg-drv-savage
 xorg-drv-sis
 xorg-drv-synaptics
 xorg-drv-vesa
-xorg-drv-video
 xorg-drv-void
 xorg-drv-qxl
 
@@ -24,6 +23,7 @@ xorg-drv-qxl
 xorg-dri-intel
 
 xauth
+
 xorg-utils
 
 x-cursor-theme-jimmac
