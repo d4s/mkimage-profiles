@@ -9,11 +9,12 @@ use/evm: use/live/hooks
 
 use/evm/cluster: use/evm
 	@$(call add,LIVE_LISTS,evm-cluster)
+	@$(call add,LIVE_LISTS,domain-client)
 
 use/evm/devel: use/evm
 	@$(call add,LIVE_LISTS,evm-devel)
 
-use/evm/desktop: use/evm use/live/desktop
+use/evm/desktop: use/evm use/live/devel
 	@$(call add,LIVE_LISTS, $(call tags,(base || extra) && (archive || rescue || network)))
 	@$(call add,LIVE_LISTS,evm)
 	@$(call add,LIVE_LISTS,gns3)

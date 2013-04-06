@@ -47,7 +47,7 @@ libqt4-*
 cmake-gui
 phonon-devel
 
-libSDL*
+libSDL*-devel
 
 unixODBC*
 
@@ -62,7 +62,6 @@ eclipse-egit
 eclipse-gef*
 eclipse-changelog
 eclipse-quickrex
-eclipse-phpeclipse
 
 eclipse-nls-ru
 
