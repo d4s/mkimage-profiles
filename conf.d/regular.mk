@@ -2,13 +2,14 @@
 ifeq (distro,$(IMAGE_CLASS))
 
 # common ground
-distro/.regular-bare: distro/.base +vmguest +wireless \
-	use/efi/signed use/luks use/memtest use/stage2/net-eth use/kernel/net
+distro/.regular-bare: distro/.base +wireless use/efi/signed use/luks \
+	use/memtest use/stage2/net-eth use/kernel/net
 	@$(call try,SAVE_PROFILE,yes)
 
 # WM base target
-distro/.regular-base: distro/.regular-bare +live use/live/ru use/live/install \
-	use/live/repo use/x11/3d-free use/luks use/branding
+distro/.regular-base: distro/.regular-bare +vmguest +live \
+	use/live/ru use/live/install use/live/repo use/live/rw \
+	use/x11/3d-free use/branding
 	@$(call add,LIVE_LISTS,$(call tags,(base || desktop) && regular))
 	@$(call add,LIVE_LISTS,$(call tags,rescue extra))
 	@$(call add,THE_BRANDING,indexhtml notes alterator)
@@ -18,6 +19,7 @@ distro/.regular-base: distro/.regular-bare +live use/live/ru use/live/install \
 # TODO: use/plymouth/live when luks+plymouth is done, see also #28255
 distro/.regular-desktop: distro/.regular-base \
 	use/systemd use/syslinux/ui/gfxboot use/firmware/laptop use/efi/refind
+	@$(call add,LIVE_PACKAGES,fuse-exfat)
 	@$(call add,LIVE_LISTS,domain-client)
 	@$(call add,THE_BRANDING,bootloader)
 	@$(call set,KFLAVOURS,std-def)
@@ -25,8 +27,7 @@ distro/.regular-desktop: distro/.regular-base \
 distro/.regular-gtk: distro/.regular-desktop use/x11/lightdm/gtk +plymouth; @:
 
 distro/regular-icewm: distro/.regular-base use/x11/lightdm/gtk +icewm
-	@$(call add,LIVE_PACKAGES,xxkb mutt)
-	@$(call add,LIVE_PACKAGES,deepsolver deepsolver-repo)
+	@$(call add,LIVE_LISTS,$(call tags,regular icewm))
 	@$(call set,KFLAVOURS,un-def)
 
 distro/regular-wmaker: distro/.regular-desktop use/x11/lightdm/gtk \
@@ -41,6 +42,9 @@ distro/regular-xfce: distro/.regular-gtk use/x11/xfce; @:
 
 distro/regular-lxde: distro/.regular-gtk use/x11/lxde use/fonts/infinality
 	@$(call add,LIVE_LISTS,$(call tags,desktop nm))
+
+distro/regular-xmonad: distro/.regular-gtk use/x11/xmonad
+	@$(call add,LIVE_PACKAGES,livecd-regular-xmonad)
 
 distro/regular-mate: distro/.regular-gtk
 	@$(call add,LIVE_LISTS,$(call tags,(desktop || mobile) && (mate || nm)))
@@ -66,7 +70,7 @@ distro/regular-razorqt: distro/.regular-desktop +razorqt +plymouth; @:
 
 distro/regular-sugar: distro/.regular-gtk use/x11/sugar; @:
 
-distro/regular-rescue: distro/.regular-bare use/rescue \
+distro/regular-rescue: distro/.regular-bare use/rescue/rw \
 	use/syslinux/ui/menu use/hdt use/efi/refind
 	@$(call set,KFLAVOURS,un-def)
 

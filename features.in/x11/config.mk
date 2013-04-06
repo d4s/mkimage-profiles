@@ -1,5 +1,6 @@
 +icewm: use/x11/icewm; @:
 +razorqt: use/x11/razorqt use/x11/lightdm/razorqt; @:
++xmonad: use/x11/xmonad; @:
 +tde: use/x11/tde use/x11/kdm; @:
 +kde4-lite: use/x11/kde4-lite use/x11/kdm4; @:
 
@@ -67,6 +68,7 @@ use/x11/cinnamon: use/x11/xorg use/x11/drm
 
 use/x11/gnome3: use/x11/xorg use/x11/drm
 	@$(call add,THE_PACKAGES,gnome3-default)
+	@$(call add,THE_PACKAGES,gst-libav pulseaudio-daemon)
 
 use/x11/e17: use/x11/xorg use/x11/3d-free
 	@$(call add,THE_LISTS,$(call tags,e17 desktop))
@@ -85,3 +87,6 @@ use/x11/wmaker: use/x11/xorg
 
 use/x11/gnustep: use/x11/xorg
 	@$(call add,THE_LISTS,$(call tags,gnustep desktop))
+
+use/x11/xmonad: use/x11/xorg
+	@$(call add,THE_LISTS,$(call tags,xmonad desktop))

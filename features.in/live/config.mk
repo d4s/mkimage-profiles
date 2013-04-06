@@ -9,6 +9,14 @@ use/live: use/stage2 sub/stage2@live
 use/live/base: use/live use/syslinux/ui/menu
 	@$(call add,LIVE_LISTS,$(call tags,base && (live || network)))
 
+# rw slice, see http://www.altlinux.org/make-initrd-propagator and #28289
+ifeq (,$(EFI_BOOTLOADER))
+use/live/rw: use/live use/syslinux
+	@$(call add,SYSLINUX_CFG,live_rw)
+else
+use/live/rw: use/live; @:
+endif
+
 # a very simplistic one
 use/live/x11: use/live use/firmware use/x11/xorg
 	@$(call add,LIVE_PACKAGES,xinit)
@@ -23,9 +31,14 @@ use/live/desktop: use/live/base use/x11/wacom use/live/sound \
 	@$(call add,SYSLINUX_CFG,localboot)
 
 # preconfigure apt for both live and installed-from-live systems
-use/live/repo:
-	@$(call add,LIVE_PACKAGES,livecd-online-repo)
+use/live/repo: use/live
 	@$(call add,LIVE_PACKAGES,installer-feature-online-repo)
+	@$(call try,LIVE_REPO,http/alt)
+	@$(call xport,LIVE_REPO)
+
+# preconfigure apt in runtime (less reliable)
+use/live/repo/online:
+	@$(call add,LIVE_PACKAGES,livecd-online-repo)
 
 # alterator-based permanent installation
 use/live/install: use/metadata use/syslinux/localboot.cfg
