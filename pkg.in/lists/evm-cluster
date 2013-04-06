@@ -14,6 +14,8 @@ torque-client
 infiniband-diags
 
 # system
+nss_ldap
+pam_ldap
 xdg-user-dirs
 openssh-clients
 
@@ -23,6 +25,8 @@ sudo
 su
 
 lxc
+
+sendmail
 
 # OpenMP
 libgomp4.6-devel
@@ -52,7 +56,11 @@ gcc4.6-fortran
 gcc4.6-java
 gcc4.6-objc++
 gcc4.6-objc
+
 # Cuda samples
 libgomp4.6-devel
 libGLUT-devel
 libXmu-devel
+
+# linpack
+libatlas-devel
