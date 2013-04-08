@@ -28,13 +28,13 @@ sshd
 kheaders
 xinetd
 smartd
-NetworkManager
 bluetoothd
 x11presetdrv
 "
 
 DISABLE="
 bind
+NetworkManager
 cups
 livecd-online-repo
 "
