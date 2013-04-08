@@ -1,12 +1,19 @@
-#!/bin/sh
+#!/bin/bash
 
-echo Changes for CUDA
+VERSION=4.6
 
-[ -f /etc/vmware/not_configured ] && rm -f /etc/vmware/not_configured
+for FILE in x86_64-alt-linux-gcc x86_64-alt-linux-g++ x86_64-alt-linux-cpp x86_64-alt-linux-gcov x86_64-alt-linux-gfortran
+do
+    alternatives-manual /usr/bin/$FILE /usr/bin/$FILE-$VERSION
+done
 
-mkdir -p /opt/cuda
-#curl ftp://192.168.11.180/cluster/root/cuda-installed-5.0.35.tar.gz | tar -C /opt/cuda -xz 
-#curl ftp://192.168.11.180/cluster/root/cuda-libs.tar.gz | tar -C / -xz
+alternatives-update
 
+echo "/opt/cuda/lib64" >/etc/ld.so.conf.d/cuda-toolkit.conf
 
-#depmod -a
+cat <<E_O_F >/etc/bashrc.d/cuda-toolkit.sh
+export PATH=$PATH:/opt/cuda/bin
+
+E_O_F
+chmod 755 /etc/bashrc.d/cuda-toolkit.sh
+

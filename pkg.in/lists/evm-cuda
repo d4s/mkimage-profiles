@@ -1,0 +1,26 @@
+# Cuda
+libcuda
+libcuda-devel
+libvdpau
+libvdpau-devel
+nvidia_glx_310.44
+nvidia_glx_310.44-cuda
+
+cuda-toolkit
+cuda-toolkit-samples
+kernel-modules-nvidia-un-def
+
+# For Cuda
+perl-Tie-File
+gcc4.6
+gcc4.6-c++
+gcc4.6-fortran
+gcc4.6-java
+gcc4.6-objc++
+gcc4.6-objc
+
+# Cuda samples
+libgomp4.6-devel
+libGLUT-devel
+libXmu-devel
+libXi-devel

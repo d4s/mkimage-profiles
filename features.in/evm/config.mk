@@ -10,12 +10,13 @@ use/evm: use/live/hooks
 use/evm/cluster: use/evm
 	@$(call add,LIVE_LISTS,evm-cluster)
 	@$(call add,LIVE_LISTS,domain-client)
+	@$(call add,LIVE_LISTS,evm-cuda)
 
 use/evm/devel: use/evm
 	@$(call add,LIVE_LISTS,evm-devel)
 
-use/evm/desktop: use/evm use/live/devel
-	@$(call add,LIVE_LISTS, $(call tags,(base || extra) && (archive || rescue || network)))
+use/evm/desktop: use/evm/cluster use/evm/devel distro/regular-kde4
+	@$(call add,LIVE_LISTS, $(call tags,(base || extra) && (archive || network)))
 	@$(call add,LIVE_LISTS,evm)
 	@$(call add,LIVE_LISTS,gns3)
 	@$(call add,LIVE_KMODULES,virtualbox)

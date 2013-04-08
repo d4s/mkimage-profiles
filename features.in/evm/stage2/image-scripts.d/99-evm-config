@@ -4,25 +4,6 @@ echo Changes for EVM edition
 
 [ -f /etc/vmware/not_configured ] && rm -f /etc/vmware/not_configured
 
-
-ENABLE="
-rpcbind
-sshd
-xinetd
-smartd
-NetworkManager
-bluetoothd
-"
-
-DISABLE="
-bind
-cups
-livecd-online-repo
-"
-
-for i in $ENABLE;  do chkconfig $i on  2>/dev/null; done
-for i in $DISABLE; do chkconfig $i off 2>/dev/null; done
-
 echo "ZONE=\"Europe/Minsk\"" >> /etc/sysconfig/clock
 cp -f /usr/share/zoneinfo/Europe/Minsk /etc/localtime
 
@@ -34,3 +15,18 @@ net.ipv4.conf.all.accept_redirects=0
 net.ipv4.conf.all.send_redirects=0
 E_O_F
 
+
+# For local MPI
+mpi-selector --set openmpi --system --yes
+
+cat <<E_O_F >/etc/bashrc.d/mpi.sh
+
+for f in /etc/profile.d/mpi*.sh; do
+    if [ -r "\$f" ]; then
+	. "\$f"
+    fi
+done
+unset f
+E_O_F
+
+chmod 755 /etc/bashrc.d/mpi.sh

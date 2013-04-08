@@ -1,3 +1,5 @@
+bash-completion
+
 lxc
 
 vim-enhanced
@@ -83,3 +85,11 @@ ethtool
 htop
 multipath-tools
 
+
+# Correctly setted X server
+xinit
+nvidia-xconfig
+xsetup
+udev-extras
+udev-rule-generator-cdrom
+udev_static-addon
