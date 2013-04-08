@@ -12,11 +12,10 @@ openssh-server
 sudo
 
 lxc
-bluez
+#bluez
 
 # emulators
 dosbox
-aqemu
 qemu
 qemu-kvm
 virtualbox

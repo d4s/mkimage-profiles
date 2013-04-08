@@ -48,19 +48,3 @@ netcat
 
 ethtool
 
-# Cuda
-perl-Tie-File
-gcc4.6
-gcc4.6-c++
-gcc4.6-fortran
-gcc4.6-java
-gcc4.6-objc++
-gcc4.6-objc
-
-# Cuda samples
-libgomp4.6-devel
-libGLUT-devel
-libXmu-devel
-
-# linpack
-libatlas-devel
