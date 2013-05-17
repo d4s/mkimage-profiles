@@ -1,3 +1,6 @@
+lvm2
+make-initrd-lvm
+
 openssh
 net-tools
 
@@ -10,6 +13,7 @@ update-kernel
 synaptic-usermode
 eepm
 
+bash-completion
 alterator-standalone
 cpufreq-simple
 xdg-user-dirs
