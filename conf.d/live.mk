@@ -10,8 +10,10 @@ distro/syslinux: distro/.init \
 	use/syslinux/localboot.cfg use/syslinux/ui/vesamenu use/hdt; @:
 
 distro/.live-base: distro/.base use/live/base use/power/acpi/button; @:
+distro/.live-x11: distro/.live-base use/live/x11; @:
+
 distro/.live-desktop: distro/.base +live use/live/install use/stage2/net-eth \
-	use/plymouth/live use/efi; @:
+	use/plymouth/live; @:
 distro/.live-desktop-ru: distro/.live-desktop use/live/ru; @:
 
 distro/.live-kiosk: distro/.base use/live/base use/live/autologin +power \
@@ -65,30 +67,18 @@ distro/live-webkiosk: distro/live-webkiosk-mini use/live/desktop; @:
 distro/live-webkiosk-chromium: distro/.live-webkiosk
 	@$(call add,LIVE_PACKAGES,livecd-webkiosk-chromium)
 
-distro/live-flightgear: distro/live-icewm use/live/sound use/x11/3d-proprietary
+distro/live-flightgear: distro/.live-x11 use/x11/lightdm/gtk use/x11/3d +icewm
+	@$(call add,LIVE_LISTS,$(call tags,xorg misc))
 	@$(call add,LIVE_PACKAGES,FlightGear fgo input-utils)
 	@$(call try,HOMEPAGE,http://www.4p8.com/eric.brasseur/flight_simulator_tutorial.html)
 
-distro/live-gnome: distro/.live-desktop-ru use/systemd use/live/nodm use/x11/3d-proprietary
-	@$(call add,LIVE_PACKAGES,gnome3-default)
+distro/live-e17: distro/.live-desktop-ru use/x11/e17 use/x11/lightdm/gtk; @:
 
-distro/live-cinnamon: distro/.live-desktop-ru use/live/autologin \
-	use/x11/cinnamon use/x11/3d-proprietary; @:
-
-distro/live-mate: distro/.live-desktop-ru use/live/nodm use/x11/3d-free
-	@$(call add,LIVE_LISTS,openssh $(call tags,(desktop || mobile) && mate))
-	@$(call set,KFLAVOURS,un-def)	# the newest one
-
-distro/live-e17: distro/.live-desktop-ru use/live/autologin \
-	use/x11/e17 use/x11/gdm2.20; @:
-
-distro/live-gimp: distro/live-icewm use/x11/3d-free use/live/ru
+distro/live-gimp: distro/live-icewm use/live/ru
 	@$(call add,LIVE_PACKAGES,gimp tintii immix fim)
 	@$(call add,LIVE_PACKAGES,cvltonemap darktable geeqie rawstudio ufraw)
 	@$(call add,LIVE_PACKAGES,macrofusion python-module-pygtk-libglade)
 	@$(call add,LIVE_PACKAGES,qtfm openssh-clients rsync)
 	@$(call add,LIVE_PACKAGES,design-graphics-sisyphus2)
-
-distro/live-sugar: distro/.live-desktop-ru use/x11/sugar; @:
 
 endif

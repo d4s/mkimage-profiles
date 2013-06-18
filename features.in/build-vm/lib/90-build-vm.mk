@@ -1,19 +1,17 @@
 # step 4: build the virtual machine image
 
-IMAGE_PACKAGES = $(SYSTEM_PACKAGES) \
+IMAGE_PACKAGES = $(DOT_BASE) \
+		 $(SYSTEM_PACKAGES) \
 		 $(COMMON_PACKAGES) \
 		 $(BASE_PACKAGES) \
 		 $(THE_PACKAGES) \
-		 $(call list,$(BASE_LISTS) $(THE_LISTS)) \
-		 $(call kpackages,$(THE_KMODULES) $(BASE_KMODULES),$(KFLAVOURS))
+		 $(call list,$(BASE_LISTS) $(THE_LISTS))
 
 # intermediate chroot archive
 VM_TARBALL := $(IMAGE_OUTDIR)/$(IMAGE_NAME).tar
 VM_RAWDISK := $(IMAGE_OUTDIR)/$(IMAGE_NAME).raw
-
-ifeq (,$(ROOTPW))
-$(error please provide root password via ROOTPW)
-endif
+VM_FSTYPE ?= ext4
+VM_SIZE ?= 0
 
 check-sudo:
 	@if ! type -t sudo >&/dev/null; then \
@@ -22,9 +20,9 @@ check-sudo:
 	fi
 
 prepare-image: check-sudo
-	@if ! sudo $(TOPDIR)/bin/tar2vm \
-		"$(VM_TARBALL)" "$(VM_RAWDISK)" $$VM_SIZE; then \
-		echo "** error: sudo tar2vm failed, see also doc/vm.txt" >&2; \
+	@if ! sudo $(TOPDIR)/bin/tar2fs \
+		"$(VM_TARBALL)" "$(VM_RAWDISK)"  $(VM_SIZE) $(VM_FSTYPE); then \
+		echo "** error: sudo tar2fs failed, see also doc/vm.txt" >&2; \
 		exit 1; \
 	fi
 
@@ -43,7 +41,6 @@ convert-image: prepare-image
 	fi
 
 run-image-scripts: GLOBAL_CLEANUP_PACKAGES := $(CLEANUP_PACKAGES)
-run-image-scripts: GLOBAL_ROOTPW := $(ROOTPW)
 
 # override
 pack-image: MKI_PACK_RESULTS := tar:$(VM_TARBALL)

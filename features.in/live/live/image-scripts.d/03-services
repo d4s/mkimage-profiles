@@ -22,7 +22,6 @@ switch() {
 
 ENABLE="
 dm
-gdm
 kdm
 wdm
 prefdm
@@ -54,6 +53,7 @@ bridge
 clamd
 crond
 dhcpd
+dmeventd
 dnsmasq
 lvm2-lvmetad
 lvm2-monitor
@@ -62,6 +62,7 @@ netfs
 o2cb
 ocfs2
 openvpn
+postfix
 rawdevices
 slapd
 smartd

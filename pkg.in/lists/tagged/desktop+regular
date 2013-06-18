@@ -1,4 +1,11 @@
 synaptic
+synaptic-usermode
+
+xdg-user-dirs
+
+firefox-ru
+firefox-uk
+firefox-kk
 
 alterator-browser-qt
 alterator-standalone
@@ -18,7 +25,7 @@ alterator-net-wifi
 alterator-net-shares
 alterator-proxy
 
-alterator-x11
+#alterator-x11
 alterator-xkb
 
 #alterator-datetime

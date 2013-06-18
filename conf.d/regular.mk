@@ -2,23 +2,27 @@
 ifeq (distro,$(IMAGE_CLASS))
 
 # common ground
-distro/.regular-bare: distro/.base +wireless use/efi/signed use/luks \
+distro/.regular-bare: distro/.base +wireless use/efi/signed \
 	use/memtest use/stage2/net-eth use/kernel/net
 	@$(call try,SAVE_PROFILE,yes)
 
-# WM base target
-distro/.regular-base: distro/.regular-bare +vmguest +live \
-	use/live/ru use/live/install use/live/repo use/live/rw \
-	use/x11/3d-free use/branding
+# graphical target (not enforcing xorg drivers or blobs)
+distro/.regular-x11: distro/.regular-bare use/x11/wacom +vmguest \
+	use/live/x11 use/live/ru use/live/install use/live/repo use/live/rw \
+	use/luks use/branding
 	@$(call add,LIVE_LISTS,$(call tags,(base || desktop) && regular))
 	@$(call add,LIVE_LISTS,$(call tags,base rescue))
+
+# WM base target
+distro/.regular-base: distro/.regular-x11 use/x11/xorg
+	@$(call add,LIVE_PACKAGES,installer-feature-desktop-other-fs-stage2)
 	@$(call add,THE_BRANDING,indexhtml notes alterator)
 	@$(call add,THE_BRANDING,graphics)
 
 # DE base target
 # TODO: use/plymouth/live when luks+plymouth is done, see also #28255
 distro/.regular-desktop: distro/.regular-base \
-	use/systemd use/syslinux/ui/gfxboot use/firmware/laptop use/efi/refind
+	use/syslinux/ui/gfxboot use/firmware/laptop use/efi/refind +systemd
 	@$(call add,LIVE_PACKAGES,fuse-exfat)
 	@$(call add,LIVE_LISTS,domain-client)
 	@$(call add,THE_BRANDING,bootloader)
@@ -26,7 +30,8 @@ distro/.regular-desktop: distro/.regular-base \
 
 distro/.regular-gtk: distro/.regular-desktop use/x11/lightdm/gtk +plymouth; @:
 
-distro/regular-icewm: distro/.regular-base use/x11/lightdm/gtk +icewm
+distro/regular-icewm: distro/.regular-base use/init/sysv \
+	use/x11/lightdm/gtk +icewm
 	@$(call add,LIVE_LISTS,$(call tags,regular icewm))
 	@$(call set,KFLAVOURS,un-def)
 
@@ -46,17 +51,18 @@ distro/regular-lxde: distro/.regular-gtk use/x11/lxde use/fonts/infinality
 distro/regular-xmonad: distro/.regular-gtk use/x11/xmonad
 	@$(call add,LIVE_PACKAGES,livecd-regular-xmonad)
 
-distro/regular-mate: distro/.regular-gtk
-	@$(call add,LIVE_LISTS,$(call tags,(desktop || mobile) && (mate || nm)))
+distro/regular-mate: distro/.regular-gtk use/x11/mate
+	@$(call add,LIVE_LISTS,$(call tags,mobile mate))
+	@$(call add,LIVE_LISTS,$(call tags,desktop nm))	### +nm?
 
-distro/regular-e17: distro/.regular-gtk use/x11/e17
+distro/regular-e17: distro/.regular-gtk use/x11/e17 use/fonts/infinality
 	@$(call add,LIVE_PACKAGES,xterm)
 
-distro/regular-cinnamon: distro/.regular-desktop \
+distro/regular-cinnamon: distro/.regular-gtk \
 	use/x11/cinnamon use/fonts/infinality
 	@$(call set,META_VOL_ID,ALT Linux $(IMAGE_NAME)) # see also #28271
 
-distro/regular-gnome3: distro/.regular-desktop use/x11/gnome3; @:
+distro/regular-gnome3: distro/.regular-desktop use/x11/gnome3 +plymouth; @:
 
 distro/regular-tde: distro/.regular-desktop +tde +plymouth
 	@$(call add,LIVE_LISTS,$(call tags,desktop nm))
@@ -73,5 +79,9 @@ distro/regular-sugar: distro/.regular-gtk use/x11/sugar; @:
 distro/regular-rescue: distro/.regular-bare use/rescue/rw \
 	use/syslinux/ui/menu use/hdt use/efi/refind
 	@$(call set,KFLAVOURS,un-def)
+
+distro/regular-server: distro/.regular-bare +installer \
+	use/bootloader/grub use/firmware use/server/mini
+	@$(call add,THE_LISTS,$(call tags,(base || server) && regular))
 
 endif
