@@ -11,6 +11,7 @@ use/evm/cluster: use/evm
 	@$(call add,LIVE_LISTS,evm-cluster)
 	@$(call add,LIVE_LISTS,domain-client)
 	@$(call add,LIVE_LISTS,evm-cuda)
+	@$(call add,LIVE_LISTS,evm-calibre)
 
 use/evm/devel: use/evm
 	@$(call add,LIVE_LISTS,evm-devel)
