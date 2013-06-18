@@ -1,0 +1,8 @@
+i586-libX11
+i586-libpcre3
+i586-glibc-pthread
+i586-libstdc++6
+i586-libXext
+i586-libfreetype
+i586-zlib
+i586-libnss-fallback
