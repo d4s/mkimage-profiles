@@ -3,8 +3,8 @@ libcuda
 libcuda-devel
 libvdpau
 libvdpau-devel
-nvidia_glx_310.44
-nvidia_glx_310.44-cuda
+NVIDIA_GLX
+NVIDIA_GLX-cuda
 
 cuda-toolkit
 cuda-toolkit-samples
