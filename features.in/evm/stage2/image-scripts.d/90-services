@@ -30,11 +30,11 @@ xinetd
 smartd
 bluetoothd
 x11presetdrv
+NetworkManager
 "
 
 DISABLE="
 bind
-NetworkManager
 cups
 livecd-online-repo
 "
