@@ -22,7 +22,7 @@ virtualbox
 
 # editors
 nano
-xemacs-*
+#xemacs-*
 
 vim-enhanced
 vim-spell-en
@@ -98,7 +98,7 @@ libgomp4.7-devel
 
 # Office
 djvu-viewer
-mozilla-plugin-djvu
+#mozilla-plugin-djvu
 
 hunspell-ru-lebedev
 libreoffice-langpack-ru
