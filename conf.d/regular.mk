@@ -40,20 +40,22 @@ distro/regular-wmaker: distro/.regular-desktop use/x11/lightdm/gtk \
 	@$(call add,LIVE_PACKAGES,livecd-install-wmaker)
 	@$(call add,LIVE_PACKAGES,xxkb)
 
+ifeq (i586,$(ARCH))
 distro/regular-gnustep: distro/regular-wmaker use/x11/gnustep +plymouth
 	@$(call add,THE_BRANDING,graphics)
+else
+	$(error $@ is known buggy on non-i586 at the moment)
+endif
 
-distro/regular-xfce: distro/.regular-gtk use/x11/xfce; @:
+distro/regular-xfce: distro/.regular-gtk use/x11/xfce +nm; @:
 
-distro/regular-lxde: distro/.regular-gtk use/x11/lxde use/fonts/infinality
-	@$(call add,LIVE_LISTS,$(call tags,desktop nm))
+distro/regular-lxde: distro/.regular-gtk use/x11/lxde use/fonts/infinality +nm; @:
 
 distro/regular-xmonad: distro/.regular-gtk use/x11/xmonad
 	@$(call add,LIVE_PACKAGES,livecd-regular-xmonad)
 
-distro/regular-mate: distro/.regular-gtk use/x11/mate
+distro/regular-mate: distro/.regular-gtk use/x11/mate +nm
 	@$(call add,LIVE_LISTS,$(call tags,mobile mate))
-	@$(call add,LIVE_LISTS,$(call tags,desktop nm))	### +nm?
 
 distro/regular-e17: distro/.regular-gtk use/x11/e17 use/fonts/infinality
 	@$(call add,LIVE_PACKAGES,xterm)
@@ -64,12 +66,11 @@ distro/regular-cinnamon: distro/.regular-gtk \
 
 distro/regular-gnome3: distro/.regular-desktop use/x11/gnome3 +plymouth; @:
 
-distro/regular-tde: distro/.regular-desktop +tde +plymouth
-	@$(call add,LIVE_LISTS,$(call tags,desktop nm))
+distro/regular-tde: distro/.regular-desktop +tde +plymouth +nm
 	@$(call add,LIVE_PACKAGES,kdegames kdeedu)
 
 distro/regular-kde4: distro/.regular-desktop use/x11/kde4 use/x11/kdm4 \
-	use/fonts/zerg +plymouth
+	use/fonts/zerg +pulse +plymouth
 	@$(call add,LIVE_LISTS,$(call tags,regular kde4))
 
 distro/regular-razorqt: distro/.regular-desktop +razorqt +plymouth; @:
@@ -80,8 +81,9 @@ distro/regular-rescue: distro/.regular-bare use/rescue/rw \
 	use/syslinux/ui/menu use/hdt use/efi/refind
 	@$(call set,KFLAVOURS,un-def)
 
-distro/regular-server: distro/.regular-bare +installer \
-	use/bootloader/grub use/firmware use/server/mini
+distro/regular-server: distro/.regular-bare +installer +sysvinit +power \
+	use/install2/fs use/bootloader/lilo use/firmware use/server/mini
 	@$(call add,THE_LISTS,$(call tags,(base || server) && regular))
+	@$(call set,INSTALLER,desktop)
 
 endif

@@ -36,7 +36,7 @@ unrar
 unarj
 dbus-tools-gui
 brasero
-medit
+#medit
 gcalctool
 synaptic
 synaptic-usermode
@@ -52,10 +52,6 @@ printer-drivers-base
 udev-extras
 hostname-hook-hosts
 libnss-mdns
-pulseaudio-daemon
-pulseaudio-utils
-pavucontrol
-alsa-plugins-pulse
 fdisk
 cpufreq-simple
 attr
@@ -72,7 +68,7 @@ alterator-standalone
 alterator-sysconfig
 
 # Additional
-gnome-search-tool
+#gnome-search-tool
 yelp
 
 # Compiz things

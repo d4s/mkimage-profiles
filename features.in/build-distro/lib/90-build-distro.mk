@@ -1,7 +1,8 @@
 # step 4: build the distribution image
 
-# take the latter part for complex-specified subprofiles like stage2@live
-SUBDIRS = $(SUBPROFILE_DIRS)
+# take the latter part for complex-specified subprofiles like stage2@live;
+# care to exclude non-directories holding no makefiles like rootfs
+SUBDIRS = $(sort $(dir $(wildcard $(addsuffix /Makefile,$(SUBPROFILE_DIRS)))))
 
 # proxy over the ISO metadata collected; see also genisoimagerc(5)
 BOOT_SYSI := $(META_SYSTEM_ID)
@@ -23,7 +24,7 @@ prep: $(GLOBAL_DEBUG) dot-disk $(WHATEVER)
 # can't use mp-showref which belongs to the metaprofile
 dot-disk:
 	@mkdir -p files/.disk
-	@echo "ALT Linux based" >files/.disk/info
+	@echo "$(META_VOL_ID)" >files/.disk/info
 	@echo "$(ARCH)" >files/.disk/arch
 	@echo "$(DATE)" >files/.disk/date
 	@if type -t git >&/dev/null; then \

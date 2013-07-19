@@ -5,7 +5,7 @@ ifeq (ve,$(IMAGE_CLASS))
 ve/.tegra3-base: ve/.base use/armh use/kernel
 	@$(call add,BASE_PACKAGES,nvidia-tegra)
 
-ve/.tegra3-tablet: ve/.tegra3-base use/armh-tegra3
+ve/.tegra3-tablet: ve/.tegra3-base use/armh-tegra3 +pulse
 	@$(call add,BASE_LISTS,$(call tags,base tablet))
 
 ve/.nexus7-tablet: ve/.tegra3-tablet use/armh-nexus7 \
@@ -18,7 +18,7 @@ ve/.nexus7-tablet: ve/.tegra3-tablet use/armh-nexus7 \
 
 ve/nexus7-e17: ve/.nexus7-tablet use/x11/e17 use/x11/lightdm/gtk; @:
 
-ve/nexus7-kde4: ve/.nexus7-tablet use/x11/lightdm/kde +systemd
+ve/nexus7-kde4: ve/.nexus7-tablet use/x11/lightdm/kde +systemd +pulse +nm
 	@$(call add,BASE_LISTS,$(call tags,base kde4mobile))
 
 ve/nexus7-xfce: ve/.nexus7-tablet use/x11/xfce use/x11/lightdm/gtk +systemd
@@ -29,14 +29,15 @@ endif
 ifeq (vm,$(IMAGE_CLASS))
 
 # NB: early dependency on use/kernel is on intent
-vm/.arm-base: profile/bare use/kernel use/vm-net/dhcp use/vm-ssh; @:
+vm/.arm-base: profile/bare use/kernel use/net-eth/dhcp use/vm-ssh; @:
 	@$(call add,BASE_PACKAGES,interactivesystem e2fsprogs)
 	@$(call add,BASE_PACKAGES,apt)
 	@$(call add,BASE_PACKAGES,mkinitrd uboot-tools)
 	@$(call set,BRANDING,altlinux-kdesktop)
 
-vm/.cubox-base: vm/.arm-base use/armh use/armh-cubox use/deflogin/altlinuxroot \
-	use/services/ssh use/cleanup/installer use/repo use/branding +systemd
+vm/.cubox-bare: vm/.arm-base use/armh use/armh-cubox use/services/ssh +systemd \
+	use/cleanup/installer use/repo use/branding use/xdg-user-dirs/deep \
+	+pulse
 	@$(call set,KFLAVOURS,cubox)
 	@$(call set,BRANDING,altlinux-kdesktop)
 	@$(call add,THE_BRANDING,alterator graphics indexhtml menu notes)
@@ -46,24 +47,19 @@ vm/.cubox-base: vm/.arm-base use/armh use/armh-cubox use/deflogin/altlinuxroot \
 	@$(call add,BASE_PACKAGES,gst-plugins-bad gst-plugins-ugly)
 	@$(call add,BASE_PACKAGES,fonts-ttf-droid fonts-ttf-ubuntu-font-family)
 	@$(call add,BASE_PACKAGES,fonts-ttf-liberation fonts-ttf-dejavu)
+	@$(call add,BASE_PACKAGES,LibreOffice4-full LibreOffice4-langpack-ru)
 	@$(call add,BASE_LISTS,$(call tags,(base || desktop) && regular))
 
-vm/.cubox-gtk: vm/.cubox-base use/x11/lightdm/gtk; @:
+vm/.cubox-base: vm/.cubox-bare use/deflogin/altlinuxroot; @:
+vm/.cubox-gtk: vm/.cubox-base use/x11/lightdm/gtk +nm; @:
 
-vm/cubox-e17: vm/.cubox-gtk use/x11/e17
-	@$(call add,BASE_PACKAGES,xterm)
+vm/cubox-xfce: vm/.cubox-bare use/slinux/arm use/oem use/net-usershares \
+	use/domain-client +nm; @:
 
-vm/cubox-xfce: vm/.cubox-gtk use/x11/xfce
-	@$(call set,BRANDING,simply-linux)
-	@$(call add,THE_BRANDING,xfce-settings)
-	@$(call add,BASE_LISTS,slinux/arm)
-
-vm/cubox-xfce-ru: vm/cubox-xfce
+vm/cubox-xfce-ru: vm/.cubox-gtk use/slinux/arm use/x11-autologin
 	@$(call add,BASE_PACKAGES,livecd-ru)
-	@$(call add,BASE_PACKAGES,LibreOffice4-full LibreOffice4-langpack-ru)
 
-vm/cubox-mate: vm/.cubox-gtk use/x11/mate
-	@$(call add,BASE_LISTS,$(call tags,desktop nm))
+vm/cubox-mate: vm/.cubox-gtk use/x11/mate; @:
 
 endif
 

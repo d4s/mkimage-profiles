@@ -18,7 +18,7 @@ use/live/rw: use/live; @:
 endif
 
 # graphical target (not enforcing xorg drivers or blobs)
-use/live/x11: use/live/base use/x11-autologin use/live/sound +power +efi
+use/live/x11: use/live/base use/x11-autologin use/sound +power +efi
 	@$(call add,LIVE_LISTS,$(call tags,desktop && (live || network)))
 	@$(call add,LIVE_LISTS,$(call tags,base l10n))
 	@$(call add,LIVE_PACKAGES,fonts-ttf-dejavu fonts-ttf-droid)
@@ -26,7 +26,8 @@ use/live/x11: use/live/base use/x11-autologin use/live/sound +power +efi
 	@$(call add,SYSLINUX_CFG,localboot)
 
 # this target specifically pulls free xorg drivers in (and a few more bits)
-use/live/desktop: use/live/x11 use/x11/xorg use/x11/wacom +vmguest; @:
+use/live/desktop: use/live/x11 use/x11/xorg use/x11/wacom \
+	use/xdg-user-dirs/deep +vmguest; @:
 
 # preconfigure apt for both live and installed-from-live systems
 use/live/repo: use/live
@@ -39,7 +40,7 @@ use/live/repo/online:
 	@$(call add,LIVE_PACKAGES,livecd-online-repo)
 
 # alterator-based permanent installation
-use/live/install: use/metadata use/syslinux/localboot.cfg
+use/live/install: use/metadata use/xdg-user-dirs use/syslinux/localboot.cfg
 	@$(call add,LIVE_PACKAGES,livecd-install)
 	@$(call add,LIVE_PACKAGES,livecd-installer-features)
 
@@ -65,6 +66,3 @@ use/live/hooks: use/live
 # a crude hack to make sure Russian is supported in a particular image
 use/live/ru: use/live
 	@$(call add,LIVE_PACKAGES,livecd-ru)
-
-use/live/sound: use/live
-	@$(call add,LIVE_PACKAGES,amixer alsa-utils aplay udev-alsa)
