@@ -2,6 +2,12 @@ ifeq (armh,$(ARCH))
 
 ifeq (ve,$(IMAGE_CLASS))
 
+# aliases for autobuild
+ve/regular-arm-e17: ve/arm-e17; @:
+ve/regular-arm-kde4: ve/arm-kde4; @:
+ve/altlinux-p7-nexus7-e17: ve/arm-e17; @:
+ve/altlinux-p7-nexus7-kde4: ve/arm-kde4; @:
+
 ve/.tegra3-base: ve/.base use/armh use/kernel
 	@$(call add,BASE_PACKAGES,nvidia-tegra)
 
@@ -36,8 +42,7 @@ vm/.arm-base: profile/bare use/kernel use/net-eth/dhcp use/vm-ssh; @:
 	@$(call set,BRANDING,altlinux-kdesktop)
 
 vm/.cubox-bare: vm/.arm-base use/armh use/armh-cubox use/services/ssh +systemd \
-	use/cleanup/installer use/repo use/branding use/xdg-user-dirs/deep \
-	+pulse
+	use/repo use/branding use/xdg-user-dirs/deep +pulse
 	@$(call set,KFLAVOURS,cubox)
 	@$(call set,BRANDING,altlinux-kdesktop)
 	@$(call add,THE_BRANDING,alterator graphics indexhtml menu notes)
@@ -50,16 +55,32 @@ vm/.cubox-bare: vm/.arm-base use/armh use/armh-cubox use/services/ssh +systemd \
 	@$(call add,BASE_PACKAGES,LibreOffice4-full LibreOffice4-langpack-ru)
 	@$(call add,BASE_LISTS,$(call tags,(base || desktop) && regular))
 
-vm/.cubox-base: vm/.cubox-bare use/deflogin/altlinuxroot; @:
-vm/.cubox-gtk: vm/.cubox-base use/x11/lightdm/gtk +nm; @:
-
-vm/cubox-xfce: vm/.cubox-bare use/slinux/arm use/oem use/net-usershares \
-	use/domain-client +nm; @:
-
-vm/cubox-xfce-ru: vm/.cubox-gtk use/slinux/arm use/x11-autologin
+vm/cubox-xfce-ru: vm/.cubox-bare use/deflogin/altlinuxroot \
+	use/slinux/arm use/x11/lightdm/gtk use/x11-autologin +nm
 	@$(call add,BASE_PACKAGES,livecd-ru)
 
+# these images use a kind of OEM setup
+vm/.cubox-base: vm/.cubox-bare use/oem; @:
+
+vm/.cubox-gtk: vm/.cubox-base use/x11/lightdm/gtk +nm; @:
+
+vm/cubox-xfce: vm/.cubox-gtk \
+	use/slinux/arm use/net-usershares use/domain-client; @:
+
 vm/cubox-mate: vm/.cubox-gtk use/x11/mate; @:
+	@$(call set,BRANDING,altlinux-centaurus)
+	@$(call add,THE_BRANDING,mate-settings)
+
+vm/cubox-tde: vm/.cubox-base use/net-eth/dhcp use/x11-autostart +tde
+	@$(call add,BASE_LISTS,openscada)
+
+vm/cubox-kde4: vm/.cubox-base use/x11/kde4 use/x11/kdm4 use/fonts/zerg +pulse
+	@$(call add,BASE_LISTS,$(call tags,desktop && kde4 && !extra))
+
+vm/arm-server: vm/.arm-base use/net-eth/dhcp use/cleanup/installer
+	@$(call set,KFLAVOURS,armadaxp)
+	@$(call add,BASE_PACKAGES,agetty)
+	@$(call add,BASE_LISTS,$(call tags,extra (server || network)))
 
 endif
 
