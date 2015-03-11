@@ -116,3 +116,6 @@ use/live/evm: use/live/hooks use/live/desktop
 	@$(Call add,LIVE_KMODULES,kvm virtualbox)
 	@$(call add,CLEANUP_PACKAGES,'kernel-modules-drm-nouveau*')
 
+# prepare bootloader for software suspend (see also install2)
+use/live/suspend: use/live
+	@$(call add,LIVE_PACKAGES,installer-feature-desktop-suspend-stage2)
