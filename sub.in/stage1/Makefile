@@ -26,13 +26,15 @@ STAGE1_KFLAVOUR ?= $(lastword $(KFLAVOURS))
 
 # propagator needed iff stage1 kernel installed (not for e.g. syslinux.iso)
 ifneq "$(STAGE1_KFLAVOUR)" ""
+GLOBAL_STAGE1_KFLAVOUR := $(STAGE1_KFLAVOUR)
+CHROOT_PACKAGES_REGEXP := $(call kpackages, \
+	$(STAGE1_KFLAVOUR),$(STAGE1_KMODULES_REGEXP))
+ifneq "$(findstring stage2,$(SUBPROFILES))" ""	### assumes stage2 ~ propagator
 PROPAGATOR_VERSION = ALT Linux
 PROPAGATOR_MAR_MODULES = ./modules
 PROPAGATOR_INITFS = ./initfs
 BUILD_PROPAGATOR = build-propagator
-INFO_STAGE1_KFLAVOUR := $(STAGE1_KFLAVOUR)
-CHROOT_PACKAGES_REGEXP := $(call kpackages, \
-	$(STAGE1_KMODULES_REGEXP),$(STAGE1_KFLAVOUR))
+endif
 endif
 
 CHROOT_PACKAGES_REGEXP += $(STAGE1_PACKAGES_REGEXP)
@@ -44,7 +46,7 @@ GLOBAL_SQUASHFS := $(SQUASHFS)
 -include $(sort $(wildcard lib/*.mk))
 
 # scripts prepare bootloader configuration, too
-# NB: we pass tested squashfs options for ../stage2/Makefile to include
+# NB: we pass tested squashfs options for sub.in/stage2/Makefile to include
 all: | debug prepare-workdir copy-tree run-scripts $(BUILD_PROPAGATOR) \
 	copy-$(BOOTLOADER) $(COPY_SQUASHCFG) pack-image $(GLOBAL_CLEAN_WORKDIR)
 	@if [ -s $(OUTDIR)/squashcfg.mk ]; then \

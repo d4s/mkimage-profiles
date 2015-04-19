@@ -33,7 +33,7 @@ BOOTPART=
 case "`arch`" in	# NB: sudo => no GLOBAL_ will do either; mind qemu-*
 *86*)
 	# NB: different storage modules might be needed for non-kvm
-	INITRD_MODULES="sd_mod ata_piix"
+	INITRD_MODULES="sd_mod ata_piix ahci"
 	BLOCKDEV="/dev/sda"	# might be /dev/vda for virtio
 	ROOTPART="1"
 	;;
@@ -129,7 +129,7 @@ exit_handler() {
 		umount ${BOOTFS:+"$BOOTFS"} "$ROOTFS"{/dev,/proc,/sys,}
 
 		if [ -n "$LOOPDEV" ]; then
-			kpartx -d "$LOOPDEV"
+			kpartx -d -s "$LOOPDEV"
 			losetup --detach "$LOOPDEV"
 		fi
 		rm -r -- "$ROOTFS"
@@ -167,6 +167,20 @@ if [ -n "$BOOTPART" ]; then
 	mkfs."$BOOTFSTYPE" "$LOOPBOOT"
 fi
 
+ROOTUUID="$(blkid -s UUID -o value -c /dev/null "$LOOPROOT")"
+if [ -n "$ROOTUUID" ]; then
+       ROOTDEV="UUID=$ROOTUUID"
+else
+       ROOTDEV="$LOOPROOT"
+fi
+
+if [ -n "$BOOTPART" ]; then
+	BOOTUUID="$(blkid -s UUID -o value -c /dev/null "$LOOPBOOT")"
+	if [ -n "$ROOTUUID" ]; then
+		BOOTDEV="UUID=$BOOTUUID"
+	fi
+fi
+
 # mount and populate it
 mkdir -pm755 "$ROOTFS"
 mount "$LOOPROOT" "$ROOTFS"
@@ -180,14 +194,14 @@ tar -C "$ROOTFS" --numeric-owner -xf "$TAR"
 for i in /dev /proc /sys; do mount --bind "$i" "$ROOTFS$i"; done
 
 # loop device so lilo could work...
-echo "$LOOPROOT / $ROOTFSTYPE relatime 1 1" >> "$ROOTFS/etc/fstab"
+echo "$ROOTDEV / $ROOTFSTYPE relatime 1 1" >> "$ROOTFS/etc/fstab"
 
 # target device at once
 if [ -n "$BOOTPART" ]; then
 	echo "$BOOTDEV /boot $BOOTFSTYPE defaults 1 2" >> "$ROOTFS/etc/fstab"
 fi
 
-echo "MODULES_PRELOAD=$INITRD_MODULES $ROOTFSTYPE" >> "$ROOTFS/etc/initrd.mk"
+echo "MODULES_PRELOAD += $INITRD_MODULES $ROOTFSTYPE" >> "$ROOTFS/etc/initrd.mk"
 
 KERNEL="$(readlink $ROOTFS/boot/vmlinuz | sed 's,vmlinuz-,,')"
 chroot "$ROOTFS" make-initrd -k "$KERNEL"
@@ -195,7 +209,7 @@ chroot "$ROOTFS" make-initrd -k "$KERNEL"
 # ...target device too
 sed -i "s,$LOOPROOT,$ROOTDEV," "$ROOTFS/etc/fstab"
 
-if [ -x /sbin/lilo ]; then
+if [ -x "$ROOTFS"/sbin/lilo ]; then
 	# configure and install bootloader
 	REGEXP='^Disk .*: ([0-9]+) cylinders, ([0-9]+) heads, ([0-9]+) sectors/track*$'
 	set -- $(sfdisk -l "$LOOPDEV" | grep -E "$REGEXP" | sed -r "s@$REGEXP@\1 \2 \3@")

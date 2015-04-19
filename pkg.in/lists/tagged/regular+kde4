@@ -1,6 +1,5 @@
 kde4-regular
-
-plasma-applet-networkmanager
+kde4-kamerka
 
 phonon-gstreamer
 
@@ -9,6 +8,10 @@ synaptic-usermode-
 
 gtk2-theme-oxygen-gtk
 gtk3-theme-oxygen-gtk
+kde-gtk-config
 
 altlinux-freedesktop-menu-kde4
 altlinux-freedesktop-menu-shallow-menu
+
+quick-usb-formatter
+rosa-imagewriter

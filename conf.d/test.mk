@@ -8,9 +8,7 @@ distro/syslinux-noescape: distro/syslinux-auto use/syslinux/noescape.cfg; @:
 
 distro/live-systemd: distro/.base use/live/base +systemd; @:
 distro/live-plymouth: distro/.live-base use/plymouth/live; @:
-
-distro/live-isomd5sum: distro/.base use/live/base use/isomd5sum
-	@$(call add,LIVE_PACKAGES,livecd-isomd5sum)
+distro/live-mediacheck: distro/.base use/mediacheck; @:
 
 distro/live-testserver: distro/live-install use/server/mini
 	@$(call set,KFLAVOURS,std-def el-smp)
@@ -19,15 +17,22 @@ distro/live-gns3: distro/live-icewm
 	@$(call add,LIVE_LISTS,gns3)
 	@$(call add,LIVE_KMODULES,kvm virtualbox)
 
+# NB: requires runtime Server/ServerActive setup in zabbix_agentd.conf
+distro/live-zabbix: distro/live-icewm use/net-eth
+	@$(call add,THE_PACKAGES,zabbix-agent)
+	@$(call add,DEFAULT_SERVICES_ENABLE,zabbix_agentd)
+
 distro/icewm-efi: distro/icewm use/efi/debug use/firmware
 	@$(call add,INSTALL2_PACKAGES,strace)
 
-distro/razorqt-kz: distro/regular-razorqt
+distro/mate-kz: distro/regular-mate
 	@$(call set,GLOBAL_BOOT_LANG,kk_KZ)
 	@$(call add,LIVE_PACKAGES,hunspell-kk)
 
-distro/server-systemd: distro/server-mini +systemd
-	@$(call set,KFLAVOURS,std-def)
+# a minimalistic systemd-based server installer
+distro/server-systemd: distro/server-nano \
+	use/install2/repo use/cleanup/x11-alterator use/net/networkd +systemd
+	@$(call add,CLEANUP_PACKAGES,glib2 iw libpython libwireless)
 
 distro/server-test: distro/server-mini use/relname
 	@$(call set,RELNAME,Test-Server)
@@ -35,6 +40,9 @@ distro/server-test: distro/server-mini use/relname
 # something marginally useful (as a network-only installer)
 # NB: doesn't carry stage3 thus cannot use/bootloader
 distro/netinst: distro/.base use/install2/net; @:
+
+distro/propagator-test: distro/.base use/mediacheck
+	@$(call add,STAGE2_BOOTARGS,propagator-debug)
 
 # tiny network-only server-ovz installer (stage2 comes over net too)
 distro/server-ovz-netinst: distro/.base sub/stage1 use/stage2 \
@@ -45,6 +53,25 @@ distro/desktop-luks: distro/icewm use/luks; @:
 distro/desktop-systemd: distro/icewm +systemd; @:
 distro/desktop-plymouth: distro/icewm +plymouth; @:
 distro/server-efi: distro/server-mini use/efi/debug; @:
+
+distro/server-zabbix: distro/server-mini use/server/zabbix use/net-eth
+
+# a crop of images running stuff as PID 1
+distro/bash: distro/.base use/pid1
+	@$(call add,STAGE1_PACKAGES,bash)
+	@$(call set,PID1_BIN,/bin/bash)
+
+distro/vi: distro/.base use/pid1
+	@$(call add,STAGE1_PACKAGES,vim-minimal)
+	@$(call set,PID1_BIN,/bin/vi)
+
+distro/emacs: distro/.base use/pid1
+	@$(call add,STAGE1_PACKAGES,mg)
+	@$(call set,PID1_BIN,/usr/bin/mg)
+
+distro/elinks: distro/.base use/pid1/net
+	@$(call add,STAGE1_PACKAGES,elinks)
+	@$(call set,PID1_BIN,/usr/bin/elinks)
 
 endif # IMAGE_CLASS: distro
 

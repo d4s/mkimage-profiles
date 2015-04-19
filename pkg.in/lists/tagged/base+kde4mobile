@@ -16,9 +16,4 @@ vlc-mini
 
 libqt4-sql-sqlite
 
-plasma-applet-networkmanager
-NetworkManager
-NetworkManager-vpnc
-NetworkManager-openvpn
-NetworkManager-pptp
 wpa_gui

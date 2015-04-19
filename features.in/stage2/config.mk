@@ -2,9 +2,14 @@
 use/stage2: sub/stage1
 	@$(call add_feature)
 	@$(call add,STAGE1_PACKAGES,file make-initrd make-initrd-propagator propagator)
+	@$(call xport,STAGE1_KCONFIG)
 
 use/stage2/kms:
 	@$(call add,STAGE1_KMODULES_REGEXP,drm.*)
+
+# install mount.cifs to stage1
+use/stage2/cifs-install:
+	@$(call add,STAGE1_PACKAGES,cifs-utils)
 
 # eth0 instead of enp0s3
 use/stage2/net-eth: use/stage2

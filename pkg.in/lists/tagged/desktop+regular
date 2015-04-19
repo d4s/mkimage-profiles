@@ -3,17 +3,11 @@ synaptic-usermode
 
 xdg-user-dirs
 
-firefox-ru
-firefox-uk
-firefox-kk
-
 alterator-browser-qt
 alterator-standalone
 
 alterator-root
 alterator-users
-alterator-auth
-alterator-nsswitch
 
 alterator-net-general
 alterator-net-pppoe rp-pppoe-client
@@ -22,7 +16,6 @@ alterator-net-openvpn
 alterator-net-eth
 alterator-net-wifi
 
-alterator-net-shares
 alterator-proxy
 
 #alterator-x11
@@ -30,4 +23,13 @@ alterator-xkb
 
 #alterator-datetime
 
-#system-config-printer
+glxgears
+xorg-conf-synaptics
+
+hdparm
+lm_sensors3
+sdparm
+smartmontools
+
+fonts-bitmap-terminus
+fonts-ttf-levien-inconsolata

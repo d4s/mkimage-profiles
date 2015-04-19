@@ -1,10 +1,16 @@
 #!/bin/sh
-# set root password if any; no-op if it is unset
 
-test="${GLOBAL_ROOTPW=:unset}"
+# explicitly requested empty root password
+case "$GLOBAL_ROOTPW_EMPTY" in
+1|y|Y|yes)
+	usermod -p "" root
+	exit 0
+	;;
+esac
 
-if [ "$test" = ":unset" ]; then
-	echo "** warning: no root password provided, you're on your own" >&2
+# set root password if any; no-op if it is empty
+if [ -z "$GLOBAL_ROOTPW" ]; then
+	echo "** warning: no root password provided, skipping" >&2
 else
 	echo "$GLOBAL_ROOTPW" | passwd --stdin root
 fi

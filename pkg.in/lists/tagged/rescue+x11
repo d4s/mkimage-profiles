@@ -1,3 +1,18 @@
-fsarchiver
-qt4-fsarchiver
+# mostly X11 counterparts/GUIs to some rescue+extra packages
+autopsy
+binwalk
+dissy
+dsniff-X11
+dvdisaster
+extract
+gksu
 gparted
+gsmartcontrol
+jhead
+hardinfo
+ht
+libpst-tools
+ntop
+qt4-fsarchiver
+recoll-full
+recoverjpeg

@@ -1,4 +1,3 @@
-sysklogd
 SysVinit-usermode
 
 deepsolver
@@ -6,8 +5,11 @@ deepsolver-repo
 
 xxkb
 icewm-startup-xxkb-tray
+
+iftop
 mutt
 elinks
+lftp
 
 tray_mixer_plus
 icewm-startup-tray_mixer_plus

@@ -3,7 +3,7 @@ http://en.altlinux.org/Hasher; large tmpfs helps a lot).
 
 требуется
 ~~~~~~~~~
-- ALT Linux 6.0 или выше (возможна адаптация "вниз")
+- ALT Linux 7.0 или выше (возможна адаптация "вниз")
 - установленный mkimage (свежий, как и hasher)
 - пользователь с правом запуска hasher
 
@@ -19,7 +19,7 @@ http://en.altlinux.org/Hasher; large tmpfs helps a lot).
 ~~~~~~~
 от имени root::
 ----
-# apt-get install mkimage hasher git-core
+# apt-get install mkimage mkimage-preinstall hasher git-core
 # hasher-useradd USER
 ----
 
@@ -27,7 +27,7 @@ http://en.altlinux.org/Hasher; large tmpfs helps a lot).
 ----
 $ git config --global user.email "my@email"
 $ git config --global user.name "My Name"
-$ mkdir ~/out
+$ mkdir -p ~/out ~/tmp
 ----
 
 тестовая сборка::
@@ -51,3 +51,4 @@ $ make ARCH=i586 APTCONF=~/apt/apt.conf.i586 REPORT=1 ve/generic.tar
 - http://www.altlinux.org/hasher
 - http://www.altlinux.org/mkimage
 - http://www.altlinux.org/m-p
+- http://www.altlinux.org/m-p-howto ("как поправить под себя")

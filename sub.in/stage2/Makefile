@@ -13,7 +13,8 @@ include $(GLOBAL_BUILDDIR)/distcfg.mk
 include $(GLOBAL_BUILDDIR)/functions.mk
 include $(MKIMAGE_PREFIX)/config.mk
 
-# this might have been prepared by ../stage1/scripts.d/03-test-kernel
+# this might have been prepared
+# by features.in/stage2/stage1/scripts.d/03-test-kernel
 -include $(GLOBAL_BUILDDIR)/squashcfg.mk
 
 # this should be brought in by corresponding specific stage2 feature
@@ -33,13 +34,13 @@ endif
 # need kernel modules only (which require corresponding kernel-image);
 # these go into work chroot; NB: no vmlinuz there (unless live-install)
 IMAGE_PACKAGES_REGEXP += $(call kpackages, \
+			 $(STAGE1_KFLAVOUR), \
 			 $(STAGE1_KMODULES) $(STAGE1_KMODULES_REGEXP) \
-			 $(STAGE2_KMODULES) $(STAGE2_KMODULES_REGEXP), \
-			 $(STAGE1_KFLAVOUR))
+			 $(STAGE2_KMODULES) $(STAGE2_KMODULES_REGEXP))
 
 -include $(sort $(wildcard lib/*.mk))
 
-# see also scripts.d/99-elf-stats
+# see also ./scripts.d/99-elf-stats
 ifdef GLOBAL_SQUASHFS_SORT
 ifeq (tight,$(SQUASHFS))
 CHROOT_PACKAGES += file

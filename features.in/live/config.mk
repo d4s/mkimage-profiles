@@ -1,12 +1,26 @@
 +live: use/live/desktop; @:
 
+# service defaults
+_ON = alteratord cpufreq-simple \
+      livecd-evms livecd-fstab livecd-hostname \
+      livecd-setauth livecd-setlocale livecd-net-eth livecd-install-wmaker \
+      random rpcbind plymouth avahi-daemon \
+
+_OFF = anacron blk-availability bridge clamd crond dhcpd dmeventd dnsmasq \
+       lvm2-lvmetad lvm2-monitor mdadm netfs o2cb ocfs2 openvpn postfix \
+       rawdevices slapd smartd sshd sysstat update_wms xinetd
+
 # copy stage2 as live
 # NB: starts to preconfigure but doesn't use/cleanup yet
-use/live: use/stage2 sub/rootfs@live sub/stage2@live
+use/live: use/stage2 sub/rootfs@live sub/stage2@live \
+	use/services use/deflogin/live
 	@$(call add_feature)
 	@$(call add,CLEANUP_PACKAGES,'installer*')
+	@$(call add,DEFAULT_SERVICES_ENABLE,$(_ON))
+	@$(call add,DEFAULT_SERVICES_DISABLE,$(_OFF))
+	@$(call add,CONTROL,rpcbind:local)
 
-use/live/base: use/live use/syslinux/ui/menu
+use/live/base: use/live use/net use/syslinux/ui/menu
 	@$(call add,LIVE_LISTS,$(call tags,base && (live || network)))
 
 # rw slice, see http://www.altlinux.org/make-initrd-propagator and #28289
@@ -18,16 +32,17 @@ use/live/rw: use/live; @:
 endif
 
 # graphical target (not enforcing xorg drivers or blobs)
-use/live/x11: use/live/base use/x11-autologin use/sound +power +efi
+use/live/x11: use/live/base use/deflogin/desktop use/x11-autologin use/sound \
+	use/fonts/otf/adobe use/fonts/otf/mozilla +power +efi
 	@$(call add,LIVE_LISTS,$(call tags,desktop && (live || network)))
 	@$(call add,LIVE_LISTS,$(call tags,base l10n))
-	@$(call add,LIVE_PACKAGES,fonts-ttf-dejavu fonts-ttf-droid)
 	@$(call add,LIVE_PACKAGES,pciutils)
-	@$(call add,SYSLINUX_CFG,localboot)
 
-# this target specifically pulls free xorg drivers in (and a few more bits)
+# this target specifically pulls free xorg drivers in (and a few more bits);
+# a browser is requested too, the recommended one can be overridden downstream
 use/live/desktop: use/live/x11 use/x11/xorg use/x11/wacom \
-	use/xdg-user-dirs/deep +vmguest; @:
+	use/l10n use/browser/firefox/live use/xdg-user-dirs/deep \
+	use/syslinux/localboot.cfg +vmguest; @:
 
 # preconfigure apt for both live and installed-from-live systems
 use/live/repo: use/live
@@ -45,7 +60,7 @@ use/live/install: use/metadata use/xdg-user-dirs use/syslinux/localboot.cfg
 	@$(call add,LIVE_PACKAGES,livecd-installer-features)
 
 # text-based installation script
-use/live/textinstall: use/syslinux/localboot.cfg
+use/live/textinstall: use/syslinux/lateboot.cfg
 	@$(call add,LIVE_PACKAGES,live-install)
 
 # a very simplistic one
@@ -63,6 +78,12 @@ use/live/nodm: use/live/.x11
 use/live/hooks: use/live
 	@$(call add,LIVE_PACKAGES,livecd-run-hooks)
 
-# a crude hack to make sure Russian is supported in a particular image
-use/live/ru: use/live
-	@$(call add,LIVE_PACKAGES,livecd-ru)
+# a crude hack to make sure Russian is the default in a particular image
+use/live/ru: use/live use/l10n/default/ru_RU; @:
+
+use/live/sound: use/live
+	@$(call add,LIVE_LISTS,sound/base)
+
+# prepare bootloader for software suspend (see also install2)
+use/live/suspend: use/live
+	@$(call add,LIVE_PACKAGES,installer-feature-desktop-suspend-stage2)

@@ -5,8 +5,9 @@ xauth
 twofing
 setxkbmap
 
-fonts-ttf-dejavu
-fonts-ttf-droid
+fonts-otf-adobe-source-code-pro
+fonts-otf-adobe-source-sans-pro
+fonts-otf-mozilla-fira
 
 rfkill
 wpa_supplicant
@@ -22,7 +23,6 @@ dhcpcd
 openssh
 openssh-blacklist
 
-sysklogd
 nfs-clients
 
 zsh

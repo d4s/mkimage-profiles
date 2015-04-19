@@ -1,0 +1,13 @@
+#!/bin/sh
+
+cat <<EOF > /etc/rc.d/rc.local
+#!/bin/sh
+
+for i in Master PCM Headphone; do
+	amixer set $i 75%
+	amixer set $i toggle
+done >&/dev/null
+
+EOF
+
+chmod 755 /etc/rc.d/rc.local

@@ -1,5 +1,11 @@
-# BDB
+# Databases
 db4.8-utils
+sqlite3
+
+# Office files
+antiword
+docx2txt
+unrtf
 
 # Networking
 drbd83-tools
@@ -9,22 +15,32 @@ ntp-utils
 # Optical media
 dvd+rw-tools
 readom
+udftools
 xorriso
 
 # Magnetic tapes
 dvgrab
 mt-st
 mtx
+rmt
 
 # Hardware
+cmospwd
+flashrom
 irda-utils
 lm_sensors3
 lshw
+mpt-status
+nvramtool
+smartmontools
 smbios-utils
 
 # Misc^2
 kexec-tools
 multipath-tools
+lsof
+parallel
+sysfsutils
 
 # initrd helpers
 make-initrd-devmapper
@@ -32,3 +48,17 @@ make-initrd-mdadm
 make-initrd-lvm
 make-initrd-multipath
 make-initrd-nfs
+
+# Filesystem archival tools
+fsarchiver
+wimtools
+
+# Filesystem maintenance
+duff
+fdupes
+hardlinkpy
+hardlink
+
+# Bootable FAT images
+makebootfat
+make-freedos-floppy

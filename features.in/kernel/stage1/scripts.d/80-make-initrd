@@ -1,0 +1,37 @@
+#!/bin/sh -efux
+# NB: /etc/initrd.mk carefully prepared by earlier scripts
+
+fatal() { echo "** error: $@" >&1; exit 1; }
+
+kver="$(rpm -qa 'kernel-image*' \
+	    --qf '%{installtime} %{version}-%{name}-%{release}\n' \
+	| sort -n \
+	| tail -n 1 \
+	| cut -f 2 -d ' ' \
+	| sed 's/kernel-image-//')"
+
+[ -n "$kver" ] ||
+	fatal "no kernel version identified"
+
+MAKE_INITRD_OPTS="--no-checks -k $kver"
+MAKE_INITRD_VER="`make-initrd -V \
+	| sed -rn 's/^make-initrd version ([0-9.]+)/\1/p'`"
+
+# make-initrd >= 0.7.8
+if [ "`rpmvercmp "$MAKE_INITRD_VER" "0.7.8"`" != "-1" ]; then
+	MAKE_INITRD_OPTS="$MAKE_INITRD_OPTS --no-depmod"
+fi
+
+[ -z "$GLOBAL_VERBOSE" ] ||
+	MAKE_INITRD_OPTS="$MAKE_INITRD_OPTS -v"
+
+make-initrd $MAKE_INITRD_OPTS ||
+	fatal "make-initrd failed"
+
+[ -h /boot/vmlinuz ] ||
+	ln -s vmlinuz-$kver /boot/vmlinuz
+
+[ -h /boot/initrd.img ] ||
+	ln -s initrd-$kver.img /boot/initrd.img
+
+:

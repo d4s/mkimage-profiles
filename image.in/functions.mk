@@ -19,12 +19,14 @@ map = $(foreach a,$(2),$(call $(1),$(a)))
 # kernel package list generation; see also #24669
 NULL :=
 SPACE := $(NULL) # the officially documented way of getting a space
+COMMA := ,
 
 list2re = $(subst $(SPACE),|,$(strip $(1)))
 
-# args: KMODULES, KFLAVOURS
-kpackages = $(and $(1),$(2), \
-	^kernel-(image|modules-($(call list2re,$(1))))-($(call list2re,$(2)))$$)
+# args: KFLAVOURS, KMODULES
+# NB: $(2) could be empty
+kpackages = $(and $(1), \
+	^kernel-(image|modules-($(call list2re,$(2))))-($(call list2re,$(1)))$$)
 
 # arg: branding subpackages
 branding = $(and $(1),^branding-$(BRANDING)-($(call list2re,$(1)))$$)

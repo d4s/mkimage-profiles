@@ -1,3 +1,5 @@
+glibc-locales
+
 xfsprogs
 jfsprogs
 ntfs-3g
@@ -13,14 +15,22 @@ make-initrd-mdadm
 openssh
 net-tools
 
+system-report
+
 strace
 powertop
+pciutils
+usbutils
 acpi
 
 apt-repo
+apt-rsync
+apt-scripts
 update-kernel
 eepm
 
 bash-completion
 cpufreq-simple
 eject
+
+zsh

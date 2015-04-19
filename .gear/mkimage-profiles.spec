@@ -1,5 +1,5 @@
 Name: mkimage-profiles
-Version: 1.1.7
+Version: 1.1.63
 Release: alt1
 
 Summary: ALT Linux based distribution metaprofile
@@ -12,11 +12,11 @@ Packager: Michael Shigorin <mike@altlinux.org>
 
 BuildArch: noarch
 BuildRequires: rsync asciidoc-a2x xmlgraphics-fop fonts-ttf-dejavu
-BuildRequires: /proc
 
 Requires: rsync git-core
 Requires: time schedutils sfdisk
 Requires: mkimage >= 0.2.5
+Requires: mkimage-preinstall
 
 # Recommends: graphviz qemu-img
 
@@ -28,6 +28,7 @@ Requires: mkimage >= 0.2.5
 %package doc
 Summary: %name documentation
 Group: Development/Documentation
+BuildRequires: java /proc
 
 %description
 mkimage-profiles is a collection of bits and pieces useful for
@@ -78,6 +79,180 @@ cp -a * %buildroot%mpdir
 %doc %docs/*
 
 %changelog
+* Mon Mar 30 2015 Michael Shigorin <mike@altlinux.org> 1.1.63-alt1
+- support USB3, ACPI suspend
+
+* Mon Mar 16 2015 Michael Shigorin <mike@altlinux.org> 1.1.62-alt1
+- starterkits-20150312
+
+* Mon Mar 09 2015 Michael Shigorin <mike@altlinux.org> 1.1.61-alt1
+- EFI_BOOTARGS
+
+* Mon Mar 02 2015 Michael Shigorin <mike@altlinux.org> 1.1.60-alt1
+- vmguest, install2: refactoring
+
+* Mon Feb 23 2015 Michael Shigorin <mike@altlinux.org> 1.1.59-alt1
+- regular rebase
+
+* Mon Feb 16 2015 Michael Shigorin <mike@altlinux.org> 1.1.58-alt1
+- vagrant feature (closes: #28553)
+
+* Mon Feb 09 2015 Michael Shigorin <mike@altlinux.org> 1.1.57-alt1
+- fix the lists copying fix
+
+* Mon Feb 02 2015 Michael Shigorin <mike@altlinux.org> 1.1.56-alt1
+- fix lilo check for vm images
+
+* Mon Jan 26 2015 Michael Shigorin <mike@altlinux.org> 1.1.55-alt1
+- lists copying fixed
+
+* Mon Jan 05 2015 Michael Shigorin <mike@altlinux.org> 1.1.54-alt1
+- live: don't force localboot
+
+* Mon Dec 15 2014 Michael Shigorin <mike@altlinux.org> 1.1.53-alt1
+- starterkits-20141212
+
+* Mon Nov 17 2014 Michael Shigorin <mike@altlinux.org> 1.1.52-alt1
+- docs: "7.0+" (closes: #30474)
+- l10n feature
+
+* Mon Nov 10 2014 Michael Shigorin <mike@altlinux.org> 1.1.51-alt1
+- current updates
+
+* Mon Oct 27 2014 Michael Shigorin <mike@altlinux.org> 1.1.50-alt1
+- minor tweaks
+
+* Mon Oct 13 2014 Michael Shigorin <mike@altlinux.org> 1.1.49-alt1
+- pkglist updates
+
+* Mon Sep 29 2014 Michael Shigorin <mike@altlinux.org> 1.1.48-alt1
+- (sysv)init: exclude systemd explicitly
+
+* Mon Sep 22 2014 Michael Shigorin <mike@altlinux.org> 1.1.47-alt1
+- kpackages() argswap
+
+* Mon Sep 15 2014 Michael Shigorin <mike@altlinux.org> 1.1.46-alt1
+- regular fixes
+
+* Mon Sep 01 2014 Michael Shigorin <mike@altlinux.org> 1.1.45-alt1
+- starterkits alpha
+
+* Mon Aug 18 2014 Michael Shigorin <mike@altlinux.org> 1.1.44-alt1
+- connman fixup
+
+* Mon Aug 04 2014 Michael Shigorin <mike@altlinux.org> 1.1.43-alt1
+- fixed package build
+
+* Mon Jul 28 2014 Michael Shigorin <mike@altlinux.org> 1.1.42-alt1
+- current bits
+
+* Mon Jul 07 2014 Michael Shigorin <mike@altlinux.org> 1.1.41-alt1
+- post-214 fixups
+
+* Mon Jun 30 2014 Michael Shigorin <mike@altlinux.org> 1.1.40-alt1
+- systemd-214
+
+* Mon Jun 16 2014 Michael Shigorin <mike@altlinux.org> 1.1.39-alt1
+- starterkits-20140612
+
+* Mon Jun 02 2014 Michael Shigorin <mike@altlinux.org> 1.1.38-alt1
+- mksquashfs 4.3 support
+
+* Mon May 26 2014 Michael Shigorin <mike@altlinux.org> 1.1.37-alt1
+- use/browser
+
+* Mon May 19 2014 Michael Shigorin <mike@altlinux.org> 1.1.36-alt1
+- regular-lxqt
+
+* Mon May 12 2014 Michael Shigorin <mike@altlinux.org> 1.1.35-alt1
+- yet another rescue week
+
+* Mon May 05 2014 Michael Shigorin <mike@altlinux.org> 1.1.34-alt1
+- remember Odessa
+
+* Mon Apr 28 2014 Michael Shigorin <mike@altlinux.org> 1.1.33-alt1
+- net-eth tweaks
+
+* Mon Apr 21 2014 Michael Shigorin <mike@altlinux.org> 1.1.32-alt1
+- regular-rescue week
+
+* Mon Apr 14 2014 Michael Shigorin <mike@altlinux.org> 1.1.31-alt1
+- live: refactoring
+- forensics mode
+
+* Mon Apr 07 2014 Michael Shigorin <mike@altlinux.org> 1.1.30-alt1
+- robotics support
+
+* Mon Mar 31 2014 Michael Shigorin <mike@altlinux.org> 1.1.29-alt1
+- mediacheck feature
+
+* Mon Mar 24 2014 Michael Shigorin <mike@altlinux.org> 1.1.28-alt1
+- install2: more cleanups
+
+* Mon Mar 17 2014 Michael Shigorin <mike@altlinux.org> 1.1.27-alt1
+- don't insist on k-m-r8168
+- codebase deduplication
+
+* Mon Mar 10 2014 Michael Shigorin <mike@altlinux.org> 1.1.26-alt1
+- docs week
+- deflogin: empty ROOTPW explicitly ignored (potential security fix)
+
+* Mon Mar 03 2014 Michael Shigorin <mike@altlinux.org> 1.1.25-alt1
+- regular updates
+
+* Mon Feb 10 2014 Michael Shigorin <mike@altlinux.org> 1.1.24-alt1
+- service bridge
+
+* Mon Feb 03 2014 Michael Shigorin <mike@altlinux.org> 1.1.23-alt1
+- live, net*, syslinux fixes (see also #26608)
+
+* Mon Jan 27 2014 Michael Shigorin <mike@altlinux.org> 1.1.22-alt1
+- ahci kludge (see #29705) :(
+
+* Mon Jan 20 2014 Michael Shigorin <mike@altlinux.org> 1.1.21-alt1
+- rescue tweaks
+
+* Mon Jan 13 2014 Michael Shigorin <mike@altlinux.org> 1.1.20-alt1
+- support for CIFS installation method (sin@)
+- glibc-locales for regular images (closes: #29693)
+
+* Mon Dec 30 2013 Michael Shigorin <mike@altlinux.org> 1.1.19-alt1
+- regular fixes
+
+* Mon Dec 23 2013 Michael Shigorin <mike@altlinux.org> 1.1.18-alt1
+- efi updates
+
+* Mon Dec 16 2013 Michael Shigorin <mike@altlinux.org> 1.1.17-alt1
+- refind branding
+
+* Mon Dec 09 2013 Michael Shigorin <mike@altlinux.org> 1.1.16-alt1
+- e18
+
+* Mon Dec 02 2013 Michael Shigorin <mike@altlinux.org> 1.1.15-alt1
+- regular fixups
+
+* Mon Nov 25 2013 Michael Shigorin <mike@altlinux.org> 1.1.14-alt1
+- important bugfix: THE_PACKAGES weren't getting through to .base
+- regular-sysv-tde related churn
+
+* Mon Nov 04 2013 Michael Shigorin <mike@altlinux.org> 1.1.13-alt1
+- rescue friday
+
+* Mon Oct 21 2013 Michael Shigorin <mike@altlinux.org> 1.1.12-alt1
+- live-builder update
+
+* Mon Oct 14 2013 Michael Shigorin <mike@altlinux.org> 1.1.11-alt1
+- luks better
+
+* Mon Sep 30 2013 Michael Shigorin <mike@altlinux.org> 1.1.10-alt1
+- regular tweaks
+
+* Mon Sep 23 2013 Michael Shigorin <mike@altlinux.org> 1.1.9-alt1
+- regular fixes
+
+* Mon Sep 16 2013 Michael Shigorin <mike@altlinux.org> 1.1.8-alt1
+- armh/p7/ve fixes
+
 * Mon Aug 26 2013 Michael Shigorin <mike@altlinux.org> 1.1.7-alt1
 - minor fixes
 

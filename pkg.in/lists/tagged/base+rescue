@@ -1,16 +1,21 @@
 # Startup
 rootfiles
+servicectl
 
 # Common
 coreutils
-glibc-locales
 glibc-nss
 glibc-utils
 man
 man-pages
-sysfsutils
-sysklogd
 util-linux
+eject
 
 # Package management
 apt-repo
+
+# Partition management
+fdisk
+
+# Serial console
+agetty

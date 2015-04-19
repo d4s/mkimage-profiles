@@ -1,30 +1,43 @@
-
 # CPU utils
 cpuburn
 x86info
 
 # Disk utils
+aff-tools
+aimage
+altquire
 bonnie++
 cfdisk
+dcfldd
+dc3dd
+dd_rescue
 ddrescue
+ddrutility
 disktype
 # NB: EVMS must be off by default as "normal" /dev/sd*
 #     would suddenly get busy otherwise
 #evms
 #evms-ncurses
-fdisk
 gpart
+hddtemp
+idle3-tools
 iotop
+iozone
 iperf
 hdparm
+lsblk
+lsmount
 lvm2
 mdadm
 ms-sys
 parted
 partclone
+recoverdm
+safecopy
 sdparm
 sfdisk
 smartmontools
+testdisk
 mtools
 partimage
 gdisk
@@ -36,7 +49,6 @@ whdd
 binutils
 dmidecode
 gnupg
-hexedit
 pciutils
 procps
 quota
@@ -46,12 +58,21 @@ time
 openssl
 
 # Applications/Editors
+biew
+hexedit
+lde
+nano
+tweak
 vim-console
 
 # Applications/File
+agrep-tre
+enca
 findutils
 file
 less
+lnav
+wdiff
 
 # Filesystem maintenance
 btrfs-progs
@@ -62,6 +83,7 @@ logfsprogs
 nilfs-utils
 reiser4progs
 reiserfsprogs
+shake
 xfsprogs
 
 # Compressed filesystem image
@@ -72,33 +94,69 @@ squashfsprogs3
 squashfsprogs-xz
 
 # Foreign filesystems
+bindfs
 dosfstools
+exfat-utils
 exofs-utils
+fatback
 fatresize
+fuse-chironfs
+fuse-chunkfs
+fuse-ciopfs
+fuse-compFUSEd
+fuse-funion
 fuse-zfs
 hfsprogs
+ifuse
+libevt-tools
+libevtx-tools
+liblnk-tools
+libpff-tools
+libregf-tools
+libuna-tools
+libvshadow-tools
+libwrc-tools
 ntfs-3g
 ocfs2-tools
+vmfs-tools
 
 # Filesystem recovery/cleanup
 ext3grep
 extundelete
 foremost
+ftimes
+fuse-convmvfs
 magicrescue
+photorec
 recover
-recoverdm
 scalpel
 sleuthkit
-testdisk
-testdisk-doc
+srm
 wipefreespace
 xfsdump
 zerofree
 
+# Archiving/Compression
+archivemount
+fuse-7z
+
 # Applications/Networking
+adcfw-log
 arpwatch
+cifs-utils
+davfs2
+dhcpdump
+dsniff
 elinks
+fping
+fuse-curlftpfs
+fuse-lftpfs
+fuse-sshfs
 hostinfo
+hping2
+hping3
+httpry
+httpry-scripts
 iftop
 ipmitool
 iproute2
@@ -108,34 +166,67 @@ lft
 lftp
 mailx
 mtr
+ncpfs
 netcat
 netlist
+nfs-server
 nfs-utils
-cifs-utils
 ngrep
 nmap
 p0f
+rsh
 rsync
 scanssh
+sflowtool
+#shellinabox
 #stunnel
 tcpdump
+tcpflow
+tcpreen
+tcpreplay
+tcptrace
 tcptraceroute
+tcputils
+tcpxtract
 telnet
 traceroute
+wdfs
 wget
+whatmask
 whois
 
 # Applications/Shells
-zsh
 ash
 bash
 bc
 gpm
 mc
+pdksh
+zsh
+
+# Terminals
+screen
+tmux
 
 # Development/Debuggers
+btparser
+gdb
+ltrace
 strace
 sysstat
+udis86
 
 # win32
 chntpw
+scrounge-ntfs
+wabread
+
+# Mobile
+android-tools
+fuse-obexfs
+fuse-siefs
+gammu
+usbmuxd
+
+# l10n
+glibc-locales

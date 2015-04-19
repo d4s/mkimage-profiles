@@ -19,8 +19,10 @@ IFACEDIR="/etc/net/ifaces"
 write_iface() {
 	dir="$IFACEDIR/$iface"
 	mkdir -p "$dir"
+	append=
 	case "$proto" in
 	dhcp)
+		append="DHCP_TIMEOUT=3"
 		;;
 	static)
 		[ -n "$ipv4addr" ] || fatal "ipv4addr missing"
@@ -34,11 +36,11 @@ write_iface() {
 	esac
 	{
 		echo "TYPE=eth"
-		echo "DISABLED=no"
 		echo "BOOTPROTO=$proto"
 		echo "NM_CONTROLLED=$NMCTL"
 		echo "DISABLED=$NMCTL"
 		echo "#USE_IFPLUGD=yes"
+		[ -z "$append" ] || echo "$append"
 	} > "$dir/options"
 }
 
