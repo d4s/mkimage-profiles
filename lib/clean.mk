@@ -24,7 +24,9 @@ clean:
 	@{ \
 	find -name '*~' -delete >&/dev/null ||:; \
 	if [ -L "$(SYMLINK)" -a -d "$(SYMLINK)"/ ]; then \
-		echo "$(TIME) cleaning up $(WARNING)"; \
+		if [ -z "$(QUIET)" ]; then \
+			echo "$(TIME) cleaning up $(WARNING)"; \
+		fi; \
 		$(MAKE) -C "$(SYMLINK)" $@ \
 			GLOBAL_BUILDDIR="$(realpath $(SYMLINK))" $(LOG) ||:; \
 	fi; \
@@ -58,10 +60,12 @@ postclean: build-image
 	   [ -z "$(CHECK)" ] && \
 	   [ -z "$(REPORT)" ] && \
 	   [ "$(NUM_TARGETS)" -gt 1 \
-	       -o -n "$(__frontend)" \
+	       -o ! -t 1 \
 	       -o ! -L "$(SYMLINK)" ]; \
 	then \
-		echo "$(TIME) cleaning up after build"; \
+		if [ -z "$(QUIET)" ]; then \
+			echo "$(TIME) cleaning up after build"; \
+		fi; \
 		$(MAKE) -C "$(BUILDDIR)" distclean \
 			GLOBAL_BUILDDIR="$(BUILDDIR)" $(LOG) ||:; \
 		rm -rf "$(BUILDDIR)"; \

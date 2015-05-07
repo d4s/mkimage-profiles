@@ -69,6 +69,9 @@ use/x11/kdm4: use/x11-autostart
 use/x11/gdm2.20: use/x11-autostart
 	@$(call add,THE_PACKAGES,gdm2.20)
 
+use/x11/sddm: use/x11-autostart
+	@$(call add,THE_PACKAGES,sddm)
+
 use/x11/icewm: use/x11
 	@$(call add,THE_LISTS,$(call tags,icewm desktop))
 
@@ -131,3 +134,9 @@ use/x11/mate: use/x11
 
 use/x11/dwm: use/x11
 	@$(call add,THE_LISTS,$(call tags,dwm desktop))
+
+use/x11/leechcraft: use/x11
+	@$(call add,THE_PACKAGES,leechcraft)
+
+use/x11/kde5: use/x11/xorg
+	@$(call add,THE_PACKAGES,kde5-big icon-theme-oxygen)

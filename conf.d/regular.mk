@@ -116,7 +116,8 @@ distro/regular-xfce: distro/.regular-gtk \
 	use/x11/xfce use/domain-client/full use/browser/firefox/classic \
 	use/x11/gtk/nm +nm; @:
 
-distro/regular-xfce-sysv: distro/.regular-sysv-gtk use/x11/xfce; @:
+distro/regular-xfce-sysv: distro/.regular-sysv-gtk use/x11/xfce
+	@$(call add,LIVE_PACKAGES,xfce4-mixer)
 
 distro/regular-lxde: distro/.regular-gtk use/x11/lxde use/fonts/infinality \
 	use/x11/gtk/nm +nm
@@ -173,6 +174,12 @@ distro/regular-lxqt-sysv: distro/.regular-sysv mixin/regular-lxqt \
 	use/net-eth/dhcp use/efi/refind; @:
 
 distro/regular-sugar: distro/.regular-gtk use/x11/sugar; @:
+
+distro/regular-leechcraft: distro/.regular-desktop \
+	use/x11/leechcraft use/x11/lightdm/lxqt; @:
+
+distro/regular-kde5: distro/.regular-desktop \
+	use/x11/kde5 use/x11/sddm use/fonts/zerg +nm +pulse +plymouth; @:
 
 # NB: never ever use/syslinux/ui/gfxboot here as gfxboot mangles
 #     kernel cmdline resulting in method:disk instead of method:cdrom

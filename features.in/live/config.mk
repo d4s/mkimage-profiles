@@ -12,16 +12,18 @@ _OFF = anacron blk-availability bridge clamd crond dhcpd dmeventd dnsmasq \
 
 # copy stage2 as live
 # NB: starts to preconfigure but doesn't use/cleanup yet
-use/live: use/stage2 sub/rootfs@live sub/stage2@live \
-	use/services use/deflogin/live
+use/live: use/stage2 sub/rootfs@live sub/stage2@live use/services
 	@$(call add_feature)
 	@$(call add,CLEANUP_PACKAGES,'installer*')
 	@$(call add,DEFAULT_SERVICES_ENABLE,$(_ON))
 	@$(call add,DEFAULT_SERVICES_DISABLE,$(_OFF))
 	@$(call add,CONTROL,rpcbind:local)
 
-use/live/base: use/live use/net use/syslinux/ui/menu
-	@$(call add,LIVE_LISTS,$(call tags,base && (live || network)))
+use/live/.base: use/live use/syslinux/ui/menu
+	@$(call add,LIVE_LISTS,$(call tags,base live))
+
+use/live/base: use/live/.base use/net use/deflogin/live
+	@$(call add,LIVE_LISTS,$(call tags,base network))
 
 # rw slice, see http://www.altlinux.org/make-initrd-propagator and #28289
 ifeq (,$(EFI_BOOTLOADER))
@@ -87,3 +89,19 @@ use/live/sound: use/live
 # prepare bootloader for software suspend (see also install2)
 use/live/suspend: use/live
 	@$(call add,LIVE_PACKAGES,installer-feature-desktop-suspend-stage2)
+
+# deny network/local drive access for security reasons
+use/live/privacy: use/services use/memclean use/deflogin
+	@$(call add,DEFAULT_SERVICES_ENABLE,livecd-nodisks)
+	@$(call add,LIVE_PACKAGES,livecd-nodisks)
+	@$(call add,LIVE_CLEANUP_KDRIVERS,kernel/net/)
+	@$(call add,LIVE_CLEANUP_KDRIVERS,kernel/drivers/net/)
+	@$(call add,LIVE_CLEANUP_KDRIVERS,kernel/drivers/ata/)
+	@$(call add,LIVE_CLEANUP_KDRIVERS,kernel/drivers/scsi/)
+	@$(call add,LIVE_CLEANUP_KDRIVERS,kernel/drivers/block/)
+	@$(call add,LIVE_CLEANUP_KDRIVERS,kernel/drivers/cdrom/)
+	@$(call add,LIVE_CLEANUP_KDRIVERS,kernel/drivers/firewire/)
+	@$(call add,LIVE_CLEANUP_KDRIVERS,kernel/drivers/bluetooth/)
+	@$(call set,STAGE1_MODLISTS,stage2-ata stage2-drm stage2-hid)
+	@$(call add,STAGE1_MODLISTS,stage2-mmc stage2-usb)
+	@$(call add,USERS,altlinux:::)
