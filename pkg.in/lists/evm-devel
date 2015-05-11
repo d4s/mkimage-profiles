@@ -1,21 +1,50 @@
-bash-completion
+# kernel
+kernel-headers-modules-std-def
+kernel-headers-std-def
+kernel-headers-common
 
-lxc
+### EVM section begin
+
+# Command line
+bash-completion
+bash-completion-systemd
+bash-completion-journalctl
+bash-completion-cmake
+bash-completion-udev
+bash-completion-util-linux
 
 vim-enhanced
 vim-spell-en
 vim-spell-ru-lebedev
 vim-plugin-*
+pyclewn
+vimtutor
 
+# Virtualisation and containers
+lxc
+lxc-python3
+lxc-devel
 
-# alt-devel
-appliance-devel-alt
-appliance-devel-rpm-build
-appliance-devel-base
-appliance-devel-debug
+qemu
+qemu-user-binfmt_misc
+qemu-user
+qemu-system
 
+libvirt
+libvirt-vbox
+libvirt-kvm
+libvirt-qemu
 
-### EVM section begin
+libvirt-daemon-driver-vbox
+libvirt-daemon-driver-lxc
+libvirt-daemon-driver-qemu
+libvirt-daemon-config-network
+libvirt-daemon-driver-network
+libvirt-daemon-driver-storage
+
+open-ovf
+
+virtualbox-guest-*
 
 # Debug&profiling
 strace
@@ -25,19 +54,37 @@ valgrind
 oprofile
 
 # Developer
-
 ccache
 man-pages*
+doxygen
 
+#
+cmake
+cmake-modules
 clang
 clang-analyzer
+ctest
 
 java-devel-default
 
+# gcc
+gcc4.9
+gcc4.9-c++
+gcc4.9-fortran
+gcc4.9-go
+gcc4.9-java
+
+gcc4.9-locales
+gcc4.9-doc
+
+# OpenMP
+libgomp4.9-devel
 
 # Libs
 libncurses-devel
 
+# boost
+boost-complete
 
 # version control
 git
@@ -50,21 +97,28 @@ subversion
 mercurial
 
 # python
+python
+python-base
+python-dev
+
+python3
+python3-base
+python3-dev
 
 # erlang
 erlang-full
 erlang-doc*
 
 # haskell
-ghc7.6.1-full
+ghc7.6.1
+#ghc7.6.1-full
 
-# GO
-gcc4.7-go
+# Go
+golang
+golang-docs
+golang-gdb
 
-# OpenMP
-libgomp4.7-devel
-
-# net
+# Network tools
 nmap
 tcpdump
 traceroute
@@ -73,6 +127,7 @@ iptables
 iptables-ipv6
 iptables-devel
 
+ftp
 lftp
 wget
 curl
@@ -80,11 +135,26 @@ telnet
 netcat
 
 ethtool
+bridge-utils
+
+bind-utils
+ntpdate
+
+rsync
+openssh-server
+iftop
 
 # tools
-htop
-multipath-tools
+sudo
+su
 
+htop
+pv
+
+screen
+tmux
+
+multipath-tools
 
 # Correctly setted X server
 xinit
@@ -93,3 +163,23 @@ xsetup
 udev-extras
 udev-rule-generator-cdrom
 udev_static-addon
+glxgears
+
+# packaging
+gear
+hasher
+rpmdevtools
+
+# latex
+texlive-latex-recommended
+texmf-latex-beamer
+
+# protobuf
+protobuf-c-compiler
+libprotobuf-c-devel
+
+protobuf-compiler
+libprotobuf-devel
+
+python-module-protobuf
+protobuf-java

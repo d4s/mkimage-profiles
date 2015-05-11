@@ -32,6 +32,8 @@ bluetoothd
 x11presetdrv
 NetworkManager
 livecd-save-nfs
+virtualbox
+libvirtd
 "
 
 DISABLE="

@@ -1,5 +1,7 @@
 #!/bin/bash
 
+exit 0
+
 VERSION=4.6
 
 for FILE in x86_64-alt-linux-gcc x86_64-alt-linux-g++ x86_64-alt-linux-cpp x86_64-alt-linux-gcov x86_64-alt-linux-gfortran

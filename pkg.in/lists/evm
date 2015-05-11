@@ -1,6 +1,6 @@
 # KDE4
 kde4
-kde4-devel
+#kde4-devel
 kde4-i18n-ru
 
 # system
@@ -11,13 +11,10 @@ rsync
 openssh-server
 sudo
 
-lxc
 #bluez
 
 # emulators
 dosbox
-qemu
-qemu-kvm
 virtualbox
 
 # editors
@@ -29,114 +26,114 @@ vim-spell-en
 vim-spell-ru-lebedev
 vimtutor
 #vim-X11
-vim-plugin-*
+vim-plugin-taglist
+vim-plugin-lh_cpp-ftplugin
+vim-plugin-std_c-syntax
+vim-plugin-CRefVIM
 
 ### EVM section begin
 
 # Developer
+qt-creator
+qt-creator-doc
+#kdevelop-maxi
+kdbg
 
-ccache
-
-man-pages*
-
-libncurses-devel
-
-qt-creator*
-libqt4-*
+libqt4-devel
 cmake-gui
-phonon-devel
+#phonon-devel
 
 libSDL*-devel
 
 unixODBC*
 
+#Java
+aopalliance
 # Eclipse
 eclipse-pde
 eclipse-rcp
 eclipse-demos
 
+eclipse-cmakeed
 eclipse-cdt*
-eclipse-demos
-eclipse-egit
+eclipse-emf*
 eclipse-gef*
-eclipse-changelog
-eclipse-quickrex
+eclipse-jdt
+eclipse-egit
+eclipse-moreunit
+
+# parallel programming
+eclipse-ptp*
 
 eclipse-nls-ru
 
 # Netbeans
-netbeans-*
+#netbeans-*
 
 # version control
-git
 git-gui
 gitk
-git-cvs
-git-doc
-git-svn
-
-subversion
-#subversion-tools
-
-mercurial
 
 # python
 eric4
-
-# erlang
-erlang-full
-erlang-doc*
-
-# haskell
-ghc7.6.1-full
-
-# GO
-gcc4.7-go
-
-# OpenMP
-libgomp4.7-devel
 
 # Office
 djvu-viewer
 #mozilla-plugin-djvu
 
 hunspell-ru-lebedev
-libreoffice-langpack-ru
-libreoffice
+#libreoffice-langpack-ru
+#libreoffice
+LibreOffice4
+LibreOffice4-kde4
+LibreOffice4-extensions
 
 # net
-nmap
-tcpdump
 tshark
 wireshark*
-traceroute
 
-iptables
-iptables-ipv6
-iptables-devel
+firefox
+firefox-ru
+mozilla-plugin-adobe-flash
 
-ftp
-lftp
-wget
-curl
-telnet
-netcat
-gtknetcat
-
-ethtool
+chromium
 
 # Management
-italc2
-italc2-master
-italc2-client
-
+#italc2
+#italc2-master
+#italc2-client
 
 # tools
-putty
-htop
-multipath-tools
+#putty
+
+# math
+#octave*
+qtoctave
+
+R-base
+R-devel
+R-tcltk
+R-doc-info
+R-algencan
+R-pswarm
+R-doc-html
+
+maxima-xmaxima
+
+# phys
+gresistor
+
+# astro
+celestia-kde
+
+# Emulator
+virtualbox
+virt-manager
+libspice-gtk3
+libgtk3vnc-gir
 
 # other
 itest
 synaptic
 
+freemind

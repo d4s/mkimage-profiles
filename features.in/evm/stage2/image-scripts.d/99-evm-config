@@ -7,7 +7,7 @@ echo Changes for EVM edition
 echo "ZONE=\"Europe/Minsk\"" >> /etc/sysconfig/clock
 cp -f /usr/share/zoneinfo/Europe/Minsk /etc/localtime
 
-echo "BSUIR/EVM edition based on ALTLinux" > /etc/altlinux-release
+echo "ALT Linux 7.0.5 BSUIR/EVM edition" > /etc/altlinux-release
 
 echo Disabling ICMP redirects
 cat <<E_O_F >>/etc/net/sysctl.conf
@@ -30,3 +30,12 @@ unset f
 E_O_F
 
 chmod 755 /etc/bashrc.d/mpi.sh
+
+# use bash by default
+chsh -s "/bin/bash" "altlinux"
+
+# add to groups
+for group in vboxusers vmusers ; do
+    usermod -a --groups "$group" "altlinux" ||:
+done
+

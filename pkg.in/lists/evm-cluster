@@ -15,7 +15,7 @@ infiniband-diags
 
 # system
 #nss_ldap
-pam_ldap
+#pam_ldap
 xdg-user-dirs
 openssh-clients
 
