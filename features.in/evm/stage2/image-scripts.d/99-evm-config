@@ -34,8 +34,12 @@ chmod 755 /etc/bashrc.d/mpi.sh
 # use bash by default
 chsh -s "/bin/bash" "altlinux"
 
-# add to groups
-for group in vboxusers vmusers ; do
+# add user to groups
+for group in vboxusers vmusers netadmin _alteratord ; do
     usermod -a --groups "$group" "altlinux" ||:
 done
 
+# public access for restricted programms
+for facility in wireshark-capture fusermount nfsmount ppp ; do
+    control $facility public ||:
+done
