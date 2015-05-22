@@ -129,8 +129,14 @@ celestia-kde
 # Emulator
 virtualbox
 virt-manager
-libspice-gtk3
-libgtk3vnc-gir
+#libspice-gtk3
+#libgtk3vnc-gir
+
+# Arduino
+arduino
+
+# Android
+android-tools
 
 # other
 itest

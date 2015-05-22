@@ -15,7 +15,7 @@ use/evm/cluster: use/evm
 use/evm/devel: use/evm use/dev/builder/full
 	@$(call add,LIVE_LISTS,evm-devel)
 
-use/evm/desktop: distro/regular-kde4 +robotics use/live/ru
+use/evm/desktop: distro/regular-kde4 +robotics use/live/ru use/live/install
 #use/evm/desktop: use/evm/cluster use/evm/devel distro/regular-kde4 +robotics use/live/ru
 	@$(call add,LIVE_LISTS, $(call tags,(base || extra) && (archive || network)))
 	@$(call add,LIVE_LISTS,evm)
