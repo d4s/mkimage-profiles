@@ -6,10 +6,10 @@ distro/.regular-bare: distro/.base +net-eth use/kernel/net
 	@$(call try,SAVE_PROFILE,yes)
 
 # base target (for most images)
-distro/.regular-base: distro/.regular-bare use/memtest +efi +wireless; @:
+distro/.regular-base: distro/.regular-bare use/memtest +efi; @:
 
 # graphical target (not enforcing xorg drivers or blobs)
-distro/.regular-x11: distro/.regular-base +vmguest \
+distro/.regular-x11: distro/.regular-base +vmguest +wireless \
 	use/live/x11 use/live/install use/live/suspend \
 	use/live/repo use/live/rw use/luks use/x11/wacom \
 	use/branding use/browser/firefox/live use/browser/firefox/i18n
@@ -34,6 +34,7 @@ distro/.regular-desktop: distro/.regular-wm \
 	use/syslinux/ui/gfxboot use/firmware/laptop use/efi/refind +systemd
 	@$(call add,LIVE_LISTS,domain-client)
 	@$(call add,THE_BRANDING,bootloader)
+	@$(call add,THE_PACKAGES,upower bluez)
 	@$(call add,DEFAULT_SERVICES_DISABLE,gssd idmapd krb5kdc rpcbind)
 	@$(call set,KFLAVOURS,std-def)
 
@@ -81,7 +82,7 @@ distro/regular-jeos: distro/.regular-bare use/isohybrid +sysvinit \
 	@$(call add,STAGE2_BOOTARGS,quiet)
 
 distro/.regular-install-x11: distro/.regular-install \
-	use/install2/suspend mixin/regular-desktop +vmguest
+	use/install2/suspend mixin/regular-desktop +vmguest +wireless
 	@$(call set,INSTALLER,altlinux-desktop)
 	@$(call add,THE_LISTS,$(call tags,regular desktop))
 
@@ -146,13 +147,14 @@ distro/regular-gnome3: distro/.regular-desktop +plymouth +nm \
 	@$(call add,LIVE_PACKAGES,gnome3-regular)
 
 # reusable bits
-mixin/regular-tde: +tde +plymouth \
+mixin/regular-tde: +tde \
 	use/syslinux/ui/gfxboot use/browser/firefox/classic use/fonts/ttf/redhat
 	@$(call add,THE_PACKAGES,kdeedu)
-	@$(call add,THE_LISTS,openscada)
+	@$(call add,DEFAULT_SERVICES_DISABLE,upower bluez)
 
-distro/regular-tde: distro/.regular-desktop mixin/regular-tde \
-	use/x11/gtk/nm use/net/nm/mmgui; @:
+distro/regular-tde: distro/.regular-desktop mixin/regular-tde +plymouth \
+	use/x11/gtk/nm use/net/nm/mmgui
+	@$(call add,THE_LISTS,openscada)
 
 distro/regular-tde-sysv: distro/.regular-sysv mixin/regular-tde \
 	use/net-eth/dhcp use/efi/refind; @:
@@ -176,7 +178,7 @@ distro/regular-lxqt-sysv: distro/.regular-sysv mixin/regular-lxqt \
 distro/regular-sugar: distro/.regular-gtk use/x11/sugar; @:
 
 distro/regular-leechcraft: distro/.regular-desktop \
-	use/x11/leechcraft use/x11/lightdm/lxqt; @:
+	use/x11/leechcraft use/x11/lightdm/lxqt +pulse; @:
 
 distro/regular-kde5: distro/.regular-desktop \
 	use/x11/kde5 use/x11/sddm use/fonts/zerg +nm +pulse +plymouth; @:
@@ -188,10 +190,11 @@ distro/regular-kde5: distro/.regular-desktop \
 #     an unrecovered filesystem's journal
 distro/regular-rescue: distro/.regular-base use/rescue/rw use/luks \
 	use/branding use/efi/refind use/efi/shell use/efi/memtest86 \
-	use/hdt use/syslinux/ui/menu use/syslinux/rescue_fm.cfg \
-	use/syslinux/timeout/200 use/mediacheck test/rescue/no-x11
+	use/hdt use/syslinux/ui/menu use/syslinux/timeout/600 \
+	use/syslinux/rescue_fm.cfg use/syslinux/rescue_remote.cfg \
+	use/mediacheck test/rescue/no-x11 +wireless
 	@$(call set,KFLAVOURS,un-def)
-	@$(call add,RESCUE_PACKAGES,gpm)
+	@$(call add,RESCUE_PACKAGES,gpm livecd-net-eth)
 
 distro/regular-sysv-tde: distro/.regular-install-x11 \
 	mixin/desktop-installer mixin/regular-tde use/install2/fs \
@@ -202,7 +205,7 @@ distro/regular-sysv-tde: distro/.regular-install-x11 \
 	@$(call add,THE_LISTS,$(call tags,base desktop))
 	@$(call add,THE_LISTS,$(call tags,regular tde))
 	@$(call add,THE_PACKAGES,kpowersave)
-	@$(call add,MAIN_PACKAGES,man-whatis usb-modeswitch)
+	@$(call add,MAIN_PACKAGES,anacron man-whatis usb-modeswitch)
 
 distro/.regular-server: distro/.regular-install \
 	use/server/mini use/rescue/base use/cleanup/x11
@@ -221,6 +224,7 @@ distro/.regular-server-managed: distro/.regular-server
 
 distro/regular-server-ovz: distro/.regular-server-managed \
 	use/server/ovz use/server/groups/base
+	@$(call add,MAIN_GROUPS,vzstats)
 
 distro/regular-server-hyperv: distro/.regular-server-managed
 	@$(call set,KFLAVOURS,un-def)

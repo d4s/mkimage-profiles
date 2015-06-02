@@ -1,7 +1,6 @@
 SysVinit-usermode
 
-deepsolver
-deepsolver-repo
+icewm-startup-simple-sound
 
 xxkb
 icewm-startup-xxkb-tray
@@ -18,5 +17,7 @@ leafpad
 gqview
 screengrab
 design-icewm-themes
+icewm-theme-darkt
+icewm-theme-silverxp
 
 rp-pppoe-gui
