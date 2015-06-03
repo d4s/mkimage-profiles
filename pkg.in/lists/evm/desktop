@@ -91,6 +91,7 @@ LibreOffice4-extensions
 # net
 tshark
 wireshark*
+netvisix
 
 firefox
 firefox-ru

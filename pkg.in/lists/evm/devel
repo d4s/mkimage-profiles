@@ -166,7 +166,7 @@ tmux
 
 multipath-tools
 
-# Correctly setted X server
+# Correct list for X server
 xinit
 nvidia-xconfig
 xsetup

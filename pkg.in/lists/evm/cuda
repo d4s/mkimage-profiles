@@ -8,7 +8,6 @@ NVIDIA_GLX-cuda
 
 cuda-toolkit
 cuda-toolkit-samples
-kernel-modules-nvidia-un-def
 
 # For Cuda
 perl-Tie-File
