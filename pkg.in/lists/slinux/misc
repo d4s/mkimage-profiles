@@ -47,7 +47,7 @@ cups
 ghostscript-cups
 cups-pdf
 avahi-daemon
-blueman
+#blueman
 update-kernel
 printer-drivers-base
 udev-extras
