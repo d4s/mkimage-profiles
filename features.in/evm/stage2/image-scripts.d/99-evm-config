@@ -15,7 +15,6 @@ net.ipv4.conf.all.accept_redirects=0
 net.ipv4.conf.all.send_redirects=0
 E_O_F
 
-
 # For local MPI
 mpi-selector --set openmpi --system --yes
 
@@ -32,4 +31,4 @@ E_O_F
 chmod 755 /etc/bashrc.d/mpi.sh
 
 # use bash by default
-chsh -s "/bin/bash" "altlinux"
+chsh -s "/bin/bash" "altlinux" ||:
