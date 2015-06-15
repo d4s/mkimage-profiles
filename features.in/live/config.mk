@@ -106,16 +106,3 @@ use/live/privacy: use/services use/memclean use/deflogin
 	@$(call set,STAGE1_MODLISTS,stage2-ata stage2-drm stage2-hid)
 	@$(call add,STAGE1_MODLISTS,stage2-mmc stage2-usb)
 	@$(call add,USERS,altlinux:::)
-
-use/live/evm: use/live/hooks use/live/desktop
-	@$(call add,LIVE_PACKAGES,remount_rw)
-	@$(call add,LIVE_PACKAGES,livecd-save-nfs)
-	@$(call add,LIVE_LISTS,evm)
-	@$(call add,LIVE_LISTS,gns3)
-	@$(call add,LIVE_LISTS, $(call tags,(base || extra) && (archive || rescue || network)))
-	@$(Call add,LIVE_KMODULES,kvm virtualbox)
-	@$(call add,CLEANUP_PACKAGES,'kernel-modules-drm-nouveau*')
-
-# prepare bootloader for software suspend (see also install2)
-use/live/suspend: use/live
-	@$(call add,LIVE_PACKAGES,installer-feature-desktop-suspend-stage2)

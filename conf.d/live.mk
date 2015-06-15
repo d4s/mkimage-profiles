@@ -144,6 +144,4 @@ distro/live-privacy-dev: distro/live-privacy use/live/rw use/live/repo \
 	@$(call add,MAIN_LISTS,$(call tags,live builder))
 	@$(call add,MAIN_PACKAGES,syslinux mkisofs)
 
-distro/live-evm: distro/.live-desktop use/live/autologin use/x11/3d-proprietary use/live/evm
-	@$(call try,HOMEPAGE,http://bsuir.by)
 endif
