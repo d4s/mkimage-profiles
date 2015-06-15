@@ -29,7 +29,7 @@ lxc
 sendmail
 
 # OpenMP
-libgomp4.6-devel
+#libgomp4.6-devel
 
 # net
 nmap

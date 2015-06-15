@@ -44,7 +44,9 @@ libvirt-daemon-driver-storage
 
 open-ovf
 
-virtualbox-guest-*
+#virtualbox-guest-*
+virtualbox-guest-additions
+virtualbox-guest-utils
 
 # Debug&profiling
 strace
@@ -152,14 +154,18 @@ ntpdate
 
 rsync
 openssh-server
-iftop
 
 # tools
 sudo
 su
 
+iftop
+iotop
+dstat
+sysstat
 htop
 pv
+
 
 screen
 tmux

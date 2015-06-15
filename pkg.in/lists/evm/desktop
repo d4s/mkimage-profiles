@@ -2,6 +2,8 @@
 kde4
 #kde4-devel
 kde4-i18n-ru
+#kde4-mini
+livecd-kde4-akonadi-sqlite
 
 # system
 xdg-user-dirs
@@ -43,9 +45,12 @@ libqt4-devel
 cmake-gui
 #phonon-devel
 
-libSDL*-devel
+libSDL-devel
 
-unixODBC*
+#unixODBC*
+unixODBC
+libunixODBC-devel
+libunixODBC-devel-compat
 
 #Java
 aopalliance
@@ -55,9 +60,9 @@ eclipse-rcp
 eclipse-demos
 
 eclipse-cmakeed
-eclipse-cdt*
-eclipse-emf*
-eclipse-gef*
+^eclipse-cdt*
+^eclipse-emf*
+^eclipse-gef*
 eclipse-jdt
 eclipse-egit
 eclipse-moreunit
@@ -85,12 +90,12 @@ hunspell-ru-lebedev
 #libreoffice-langpack-ru
 #libreoffice
 LibreOffice4
-LibreOffice4-kde4
+#LibreOffice4-kde4
 LibreOffice4-extensions
 
 # net
 tshark
-wireshark*
+^wireshark*
 netvisix
 
 firefox
@@ -130,8 +135,6 @@ celestia-kde
 # Emulator
 virtualbox
 virt-manager
-#libspice-gtk3
-#libgtk3vnc-gir
 
 # Arduino
 arduino

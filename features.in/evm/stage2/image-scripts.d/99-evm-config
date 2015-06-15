@@ -32,3 +32,21 @@ chmod 755 /etc/bashrc.d/mpi.sh
 
 # use bash by default
 chsh -s "/bin/bash" "altlinux" ||:
+
+# Allow usage of libvirtd for anybody
+cat <<E_O_F >/etc/polkit-1/rules.d/99-libvirt.rules
+/* -*- mode: js; js-indent-level: 4; indent-tabs-mode: nil -*- */
+
+// Enable usage of libvirt for everybody
+
+polkit.addRule(function(action, subject) {
+    if (action.id.indexOf("org.libvirt.unix.manage") == 0) {
+        return polkit.Result.YES;
+    }
+});
+E_O_F
+
+# Allow nested virtualisation
+cat <<E_O_F >/etc/modprobe.d/kvm_intel-nested.conf
+options kvm_intel nested=1
+E_O_F
