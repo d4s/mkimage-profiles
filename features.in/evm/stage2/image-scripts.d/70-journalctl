@@ -1,0 +1,14 @@
+#!/bin/bash
+
+CONF=/etc/systemd/journald.conf
+
+[ -f $CONF ] || exit 0
+
+sed -i \
+    -e s/"#Storage.*"/"Storage=none"/ \
+    -e s/"#ForwardToConsole.*"/"ForwardToConsole=yes"/ \
+    -e s/"#ForwardToKMsg.*"/"ForwardToKMsg=yes"/ \
+    -e s%"#TTYPath=.*"%"TTYPath=/dev/tty10"% \
+    -e s/"#MaxLevelConsole.*"/"MaxLevelConsole=notice"/ \
+    -e s/"#MaxLevelKMsg.*"/"MaxLevelKMsg=err"/ \
+    /etc/systemd/journald.conf
