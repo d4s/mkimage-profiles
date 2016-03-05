@@ -27,36 +27,6 @@ vim-plugin-*
 pyclewn
 vimtutor
 
-# Virtualisation and containers
-lxc
-lxc-devel
-lxd
-cgmanager
-lxcfs
-
-qemu
-qemu-user-binfmt_misc
-qemu-user
-qemu-system
-
-libvirt
-libvirt-vbox
-libvirt-kvm
-libvirt-qemu
-
-libvirt-daemon-driver-vbox
-libvirt-daemon-driver-lxc
-libvirt-daemon-driver-qemu
-libvirt-daemon-config-network
-libvirt-daemon-driver-network
-libvirt-daemon-driver-storage
-
-open-ovf
-
-#virtualbox-guest-*
-virtualbox-guest-additions
-virtualbox-guest-utils
-
 # Debug&profiling
 strace
 strace-utils
