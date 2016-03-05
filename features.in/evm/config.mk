@@ -13,16 +13,27 @@ use/evm/control: use/control
 	@$(call add,CONTROL,nfsmount:public)
 	@$(call add,CONTROL,ppp:public)
 
-use/evm/deflogin: use/deflogin
-	@$(call add,GROUPS,vboxusers vmusers netadmin _alteratord)
+use/evm/deflogin: use/deflogin use/deflogin/privileges \
+		  use/live/.base use/net
+	@$(call add,LIVE_LISTS,$(call tags,base network))
+	@$(call set,ROOTPW_EMPTY,1)
+	@$(call add,USERS,devel::1:1)
+	@$(call add,GROUPS,vboxusers vmusers netadmin _alteratord lxd tun)
 
 use/evm/cluster: use/evm
 	@$(call add,LIVE_LISTS,evm/cluster)
 #	@$(call add,LIVE_LISTS,evm/cuda)
 
 
-use/evm/devel: use/evm use/dev/builder/full
+use/evm/devel: use/evm/virt use/dev/builder/full
 	@$(call add,LIVE_LISTS,evm/devel)
+
+use/evm/virt: use/evm
+	@$(call add,LIVE_LISTS,evm/virtual)
+	@$(call add,LIVE_LISTS,openssh)
+	@$(call add,LIVE_PACKAGES,livecd-net-eth)
+	@$(call add,LIVE_PACKAGES,udev-rule-generator-net)
+
 
 use/evm/desktop: use/evm +robotics use/live/ru use/live/install use/live/desktop
 #use/evm/desktop: use/evm/cluster use/evm/devel distro/regular-kde4 +robotics use/live/ru

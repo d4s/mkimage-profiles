@@ -7,7 +7,6 @@ echo Changes for EVM edition
 echo "ZONE=\"Europe/Minsk\"" >> /etc/sysconfig/clock
 cp -f /usr/share/zoneinfo/Europe/Minsk /etc/localtime
 
-echo "ALT Linux 7.0.5 BSUIR/EVM edition" > /etc/altlinux-release
 
 echo Disabling ICMP redirects
 cat <<E_O_F >>/etc/net/sysctl.conf
@@ -30,8 +29,13 @@ E_O_F
 
 chmod 755 /etc/bashrc.d/mpi.sh
 
-# use bash by default
-chsh -s "/bin/bash" "altlinux" ||:
+# use bash by default (avoid mike's lovely zsh :-E)
+[ -z "$GLOBAL_USERS" ] ||
+	echo "$GLOBAL_USERS" \
+	| tr ' ' '\n' \
+	| while IFS=':' read login passwd admin sudo; do
+		chsh -s "/bin/bash" "$login" ||:
+	done
 
 # Allow usage of libvirtd for anybody
 cat <<E_O_F >/etc/polkit-1/rules.d/99-libvirt.rules
