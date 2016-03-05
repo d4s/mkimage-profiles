@@ -4,7 +4,6 @@ vim-spell-ru-lebedev
 
 
 # Cluster tools
-bind-utils
 ntpdate
 openmpi
 openmpi-devel
@@ -12,39 +11,3 @@ torque-mom
 torque-client
 
 infiniband-diags
-
-# system
-#nss_ldap
-#pam_ldap
-xdg-user-dirs
-openssh-clients
-
-rsync
-openssh-server
-sudo
-su
-
-lxc
-
-sendmail
-
-# OpenMP
-#libgomp4.6-devel
-
-# net
-nmap
-tcpdump
-traceroute
-
-iptables
-iptables-ipv6
-iptables-devel
-
-lftp
-wget
-curl
-telnet
-netcat
-
-ethtool
-

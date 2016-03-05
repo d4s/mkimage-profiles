@@ -1,11 +1,18 @@
+### EVM section begin
+
 # kernel
 kernel-headers-modules-std-def
 kernel-headers-std-def
 kernel-headers-common
+# for perf
+linux-tools-4.1
 
-### EVM section begin
+# system
+xdg-user-dirs
+openssh-clients
 
 # Command line
+bash4
 bash-completion
 bash-completion-systemd
 bash-completion-journalctl
@@ -22,8 +29,10 @@ vimtutor
 
 # Virtualisation and containers
 lxc
-lxc-python3
 lxc-devel
+lxd
+cgmanager
+lxcfs
 
 qemu
 qemu-user-binfmt_misc
@@ -50,10 +59,12 @@ virtualbox-guest-utils
 
 # Debug&profiling
 strace
+strace-utils
 ltrace
 gdb
 valgrind
 oprofile
+gperftools
 
 # Developer
 ccache
@@ -67,30 +78,17 @@ clang
 clang-analyzer
 ctest
 
-java-devel-default
-
 # gcc
-gcc4.9
-gcc4.9-c++
-
-#gcc4.9-locales
-#gcc4.9-doc
-
 # gcc 5
 gcc5
 gcc5-c++
 gcc5-fortran
-gcc5-java
 gcc5-go
-gcc5-objc
-gcc5-objc++
-
 gcc5-gdb-plugin
-
 gcc5-doc
 
 # OpenMP
-libgomp4.9-devel
+libgomp5-devel
 
 # Libs
 libncurses-devel
@@ -129,6 +127,7 @@ ghc7.6.1
 golang
 golang-docs
 golang-gdb
+golang-tools
 
 # Network tools
 nmap
@@ -154,6 +153,7 @@ ntpdate
 
 rsync
 openssh-server
+
 
 # tools
 sudo
@@ -186,10 +186,6 @@ gear
 hasher
 rpmdevtools
 
-# latex
-texlive-latex-recommended
-texmf-latex-beamer
-
 # protobuf
 protobuf-c-compiler
 libprotobuf-c-devel
@@ -198,4 +194,22 @@ protobuf-compiler
 libprotobuf-devel
 
 python-module-protobuf
-protobuf-java
+
+# editors
+nano
+#xemacs-*
+
+vim-enhanced
+vim-spell-en
+vim-spell-ru-lebedev
+vimtutor
+#vim-X11
+vim-plugin-taglist
+vim-plugin-lh_cpp-ftplugin
+vim-plugin-std_c-syntax
+vim-plugin-CRefVIM
+
+
+# java
+#java-1.7.0-openjdk
+

@@ -5,33 +5,10 @@ kde4-i18n-ru
 #kde4-mini
 livecd-kde4-akonadi-sqlite
 
-# system
-xdg-user-dirs
-openssh-clients
-
-rsync
-openssh-server
-sudo
-
 #bluez
 
 # emulators
 dosbox
-virtualbox
-
-# editors
-nano
-#xemacs-*
-
-vim-enhanced
-vim-spell-en
-vim-spell-ru-lebedev
-vimtutor
-#vim-X11
-vim-plugin-taglist
-vim-plugin-lh_cpp-ftplugin
-vim-plugin-std_c-syntax
-vim-plugin-CRefVIM
 
 ### EVM section begin
 
@@ -40,6 +17,7 @@ qt-creator
 qt-creator-doc
 #kdevelop-maxi
 kdbg
+kde4sdk-kcachegrind
 
 libqt4-devel
 cmake-gui
@@ -52,29 +30,6 @@ unixODBC
 libunixODBC-devel
 libunixODBC-devel-compat
 
-#Java
-aopalliance
-# Eclipse
-eclipse-pde
-eclipse-rcp
-eclipse-demos
-
-eclipse-cmakeed
-^eclipse-cdt*
-^eclipse-emf*
-^eclipse-gef*
-eclipse-jdt
-eclipse-egit
-eclipse-moreunit
-
-# parallel programming
-eclipse-ptp*
-
-eclipse-nls-ru
-
-# Netbeans
-#netbeans-*
-
 # version control
 git-gui
 gitk
@@ -86,23 +41,25 @@ eric4
 djvu-viewer
 #mozilla-plugin-djvu
 
-hunspell-ru-lebedev
-#libreoffice-langpack-ru
-#libreoffice
-LibreOffice4
-#LibreOffice4-kde4
-LibreOffice4-extensions
+LibreOffice
+LibreOffice-kde4
+LibreOffice-extensions
+LibreOffice-langpack-ru
+LibreOffice-mimetypes
 
 # net
 tshark
 ^wireshark*
 netvisix
 
-firefox
-firefox-ru
-mozilla-plugin-adobe-flash
+#firefox
+#firefox-ru
+#mozilla-plugin-adobe-flash
 
 chromium
+chromium-kde
+chromium-pepperflash
+chromium-browser-flashblock
 
 # Management
 #italc2
@@ -111,6 +68,7 @@ chromium
 
 # tools
 #putty
+graphviz
 
 # math
 #octave*
@@ -130,7 +88,7 @@ maxima-xmaxima
 gresistor
 
 # astro
-celestia-kde
+#celestia-kde
 
 # Emulator
 virtualbox
@@ -147,3 +105,7 @@ itest
 synaptic
 
 freemind
+
+# latex
+texlive-latex-recommended
+texmf-latex-beamer

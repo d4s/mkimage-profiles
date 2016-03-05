@@ -1,0 +1,27 @@
+gcc5-java
+java-devel-default
+protobuf-java
+
+#Java
+aopalliance
+# Eclipse
+eclipse-pde
+eclipse-rcp
+#eclipse-demos
+eclipselink
+
+eclipse-cmakeed
+^eclipse-cdt*
+^eclipse-emf*
+^eclipse-gef*
+eclipse-jdt
+eclipse-egit
+eclipse-moreunit
+
+# parallel programming
+eclipse-ptp*
+
+eclipse-nls-ru
+
+# Netbeans
+#netbeans-*
