@@ -267,4 +267,14 @@ distro/regular-server-samba4: distro/regular-server
 	@$(call add,THE_PACKAGES,alterator-fbi alterator-dhcp)
 	@$(call add,DEFAULT_SERVICES_DISABLE,smbd nmbd winbind)
 
+distro/regular-server-lxd: distro/.regular-bare \
+	+efi +power \
+	use/live/base use/live/rw use/live/repo/online use/live/textinstall \
+	use/lxc/lxd use/tty/S0 \
+	use/init/systemd/multiuser
+	@$(call set,KFLAVOURS,un-def)
+	@$(call add,DEFAULT_SERVICES_ENABLE,sshd)
+	@$(call add,DEFAULT_SERVICES_ENABLE,lxd lxc-net lxcfs cgmanager)
+	@$(call add,DEFAULT_SERVICES_ENABLE,getty@tty1 getty@ttyS0)
+	@$(call add,DEFAULT_SERVICES_ENABLE,livecd-net-eth)
 endif
