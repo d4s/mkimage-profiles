@@ -15,8 +15,17 @@ distro/.evm_services: use/services
 	@$(call add,SERVICES_DISABLE,systemd-journald)
 	@$(call add,SERVICES_DISABLE,livecd-online-repo livecd-tmpfs)
 
-distro/live-evm-cluster: distro/.live-base distro/.evm_services \
-			 use/evm/cluster use/evm/devel use/relname
+distro/.live-evm: distro/.live-base \
+		  use/bootloader/grub \
+		  use/relname \
+		  use/isohybrid use/syslinux/timeout/30 \
+		  use/init/systemd \
+		  distro/.evm_services
+
+distro/live-evm-cluster: distro/.live-evm \
+			 use/evm/cluster \
+			 use/evm/virt \
+			 use/evm/devel
 	@$(call set,RELNAME,EVM-Cluster)
 	@$(call set,META_VOL_ID,BSUIR EVM $(IMAGE_NAME)/$(ARCH))
 	@$(call set,META_VOL_SET,BSUIR EVM)
@@ -24,8 +33,7 @@ distro/live-evm-cluster: distro/.live-base distro/.evm_services \
 	@$(call try,HOMENAME,BSUIR)
 	@$(call add,LIVE_LISTS,domain-client)
 
-distro/live-evm-virt: distro/.base distro/.evm_services \
-		       use/power/acpi/button use/relname \
+distro/live-evm-virt: distro/.live-evm \
 		       use/evm/virt \
 		       use/tty/S0 \
 		       use/init/systemd/multiuser
@@ -38,16 +46,23 @@ distro/live-evm-devel: distro/live-evm-virt \
 	@$(call set,KFLAVOURS,std-def)
 	@$(call set,RELNAME,EVM-Devel)
 
-distro/live-evm-desktop: distro/regular-kde4 distro/.live-desktop-ru  \
-			 distro/live-evm-cluster \
-			 use/evm/devel use/evm/desktop \
+distro/live-evm-desktop: distro/regular-xfce distro/.live-desktop-ru  \
+			 distro/.live-evm \
+			 use/evm/virt \
+			 use/evm/devel \
+			 use/evm/cluster \
+			 use/evm/desktop \
 			 use/live/autologin use/branding \
-			 use/x11/3d use/x11/nvidia/optimus \
-			 use/x11/kde4/nm +nm \
-			 use/init/systemd \
-			 use/isohybrid use/syslinux/timeout/30
-#	@$(call set,BRANDING,altlinux-p7)
+			 use/x11/3d
+#			 use/x11/kde4/nm +nm
+#	@$(call set,BRANDING,altlinux-centaurus)
 	@$(call set,KFLAVOURS,std-def)
+#	@$(call set,KFLAVOURS,un-def)
 	@$(call set,RELNAME,EVM-Desktop)
+	@$(call add,LIVE_LISTS,evm/devel-java)
+	@$(call add,THE_BRANDING,menu xfce-settings)
+	@$(call add,THE_BRANDING,bootloader bootsplash graphics)
+	@$(call add,STAGE2_BOOTARGS,nouveau.modeset=0)
+
 
 endif

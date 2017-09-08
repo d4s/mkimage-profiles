@@ -4,8 +4,10 @@
 kernel-headers-modules-std-def
 kernel-headers-std-def
 kernel-headers-common
+#kernel-headers-modules-un-def
+#kernel-headers-un-def
 # for perf
-linux-tools-4.1
+linux-tools-4.4
 
 # system
 xdg-user-dirs
@@ -33,15 +35,18 @@ strace-utils
 ltrace
 gdb
 valgrind
+valgrind-devel
 oprofile
 gperftools
 
 # Developer
-ccache
-man-pages*
+man-pages
+man-pages-posix
 doxygen
 
-#
+ccache
+
+# CMake
 cmake
 cmake-modules
 clang
@@ -49,16 +54,20 @@ clang-analyzer
 ctest
 
 # gcc
-# gcc 5
 gcc5
 gcc5-c++
 gcc5-fortran
-gcc5-go
 gcc5-gdb-plugin
 gcc5-doc
 
+#gcc6
+#gcc6-c++
+#gcc6-fortran
+#gcc6-gdb-plugin
+#gcc6-doc
+
 # OpenMP
-libgomp5-devel
+libgomp-devel
 
 # Libs
 libncurses-devel
@@ -97,6 +106,7 @@ ghc7.6.1
 golang
 golang-docs
 golang-gdb
+golang-lint
 golang-tools
 
 # Network tools
@@ -124,7 +134,6 @@ ntpdate
 rsync
 openssh-server
 
-
 # tools
 sudo
 su
@@ -135,7 +144,7 @@ dstat
 sysstat
 htop
 pv
-
+libcap-utils
 
 screen
 tmux
@@ -148,7 +157,6 @@ nvidia-xconfig
 xsetup
 udev-extras
 udev-rule-generator-cdrom
-udev_static-addon
 glxgears
 
 # packaging
@@ -173,13 +181,9 @@ vim-enhanced
 vim-spell-en
 vim-spell-ru-lebedev
 vimtutor
-#vim-X11
+vim-X11-gtk2
 vim-plugin-taglist
 vim-plugin-lh_cpp-ftplugin
 vim-plugin-std_c-syntax
 vim-plugin-CRefVIM
-
-
-# java
-#java-1.7.0-openjdk
 

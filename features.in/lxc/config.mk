@@ -5,6 +5,8 @@ use/lxc:
 
 use/lxc/lxd: use/lxc
 	@$(call add,GROUPS,netadmin lxd)
+	@$(call add,CONTROL,newuidmap:public)
+	@$(call add,CONTROL,newgidmap:public)
 	@$(call add,LIVE_LISTS,lxd)
 	@$(call add,LIVE_LISTS,openssh)
 	@$(call add,LIVE_PACKAGES,livecd-net-eth)

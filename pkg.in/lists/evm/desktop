@@ -1,14 +1,11 @@
 # KDE4
-kde4
+#kde4
 #kde4-devel
-kde4-i18n-ru
+#kde4-i18n-ru
 #kde4-mini
-livecd-kde4-akonadi-sqlite
+#livecd-kde4-akonadi-sqlite
 
 #bluez
-
-# emulators
-dosbox
 
 ### EVM section begin
 
@@ -41,12 +38,6 @@ eric4
 djvu-viewer
 #mozilla-plugin-djvu
 
-LibreOffice
-LibreOffice-kde4
-LibreOffice-extensions
-LibreOffice-langpack-ru
-LibreOffice-mimetypes
-
 # net
 tshark
 ^wireshark*
@@ -57,9 +48,9 @@ netvisix
 #mozilla-plugin-adobe-flash
 
 chromium
-chromium-kde
-chromium-pepperflash
-chromium-browser-flashblock
+#chromium-kde
+#chromium-pepperflash
+#chromium-browser-flashblock
 
 # Management
 #italc2
@@ -89,10 +80,6 @@ gresistor
 
 # astro
 #celestia-kde
-
-# Emulator
-virtualbox
-virt-manager
 
 # Arduino
 arduino

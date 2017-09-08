@@ -40,4 +40,12 @@ ve/systemd-bare: ve/.base use/net/networkd +systemd \
 	use/control/sudo-su use/repo use/net-ssh
 	@$(call add,BASE_PACKAGES,interactivesystem su)
 
+ve/evm-devel: ve/systemd-bare \
+	      use/evm/devel
+	@$(call set,RELNAME,EVM-Devel)
+
+ve/evm-devel: ve/systemd-bare \
+	      use/evm/devel
+	@$(call set,RELNAME,EVM-Devel)
+
 endif

@@ -55,6 +55,7 @@ CLEANUP_OUTDIR ?=
 
 GLOBAL_TARGET := $(ARCH)
 GLOBAL_HSH_APT_CONFIG := $(wildcard $(APTCONF))
+GLOBAL_HSH_PROC := $(HSH_PROC)
 
 # the lib/build-*.mk comes from features.in/build-*/lib
 include $(sort $(wildcard lib/*.mk))
@@ -99,3 +100,4 @@ debug::
 	@echo "GLOBAL_TARGET=$(GLOBAL_TARGET)"
 	@echo "GLOBAL_HSH_APT_CONFIG=$(GLOBAL_HSH_APT_CONFIG)"
 	@echo "GLOBAL_HSH_USE_QEMU=$(GLOBAL_HSH_USE_QEMU)"
+	@echo "GLOBAL_HSH_PROC=$(GLOBAL_HSH_PROC)"

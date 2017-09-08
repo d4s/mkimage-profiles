@@ -54,3 +54,13 @@ E_O_F
 cat <<E_O_F >/etc/modprobe.d/kvm_intel-nested.conf
 options kvm_intel nested=1
 E_O_F
+
+# No nouveau please
+cat <<E_O_F >/etc/modprobe.d/blacklist-nouveau.conf
+blacklist nouveau
+E_O_F
+
+# Start XFCE4 by default
+cat <<E_O_F >/etc/sysconfig/desktop
+Xfce4
+E_O_F

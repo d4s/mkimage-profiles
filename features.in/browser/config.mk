@@ -29,7 +29,6 @@ use/browser/firefox/h264: use/browser/firefox
 	@$(call add,THE_BROWSER,gst-plugins-base1.0 gst-plugins-good1.0)
 
 use/browser/firefox/live: use/browser/firefox
-	@$(call add,THE_BROWSER,livecd-firefox)
 
 # scarey, and will have to be done otherwise when l10n feature is there
 use/browser/firefox/i18n: use/browser/firefox

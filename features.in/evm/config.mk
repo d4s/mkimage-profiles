@@ -1,4 +1,4 @@
-use/evm: use/live/hooks use/live/rw +efi \
+use/evm: use/live/hooks use/live/rw +efi use/net \
 	 use/evm/control use/evm/deflogin
 	@$(call add_feature)
 	@$(call add,LIVE_PACKAGES,livecd-save-nfs)
@@ -13,11 +13,10 @@ use/evm/control: use/control
 	@$(call add,CONTROL,nfsmount:public)
 	@$(call add,CONTROL,ppp:public)
 
-use/evm/deflogin: use/deflogin use/deflogin/privileges \
-		  use/live/.base use/net
+use/evm/deflogin: use/deflogin use/deflogin/privileges
 	@$(call add,LIVE_LISTS,$(call tags,base network))
 	@$(call set,ROOTPW_EMPTY,1)
-	@$(call add,USERS,devel::1:1)
+	@$(call set,USERS,devel::1:1)
 	@$(call add,GROUPS,vboxusers vmusers netadmin _alteratord lxd tun)
 
 use/evm/cluster: use/evm
@@ -25,8 +24,8 @@ use/evm/cluster: use/evm
 #	@$(call add,LIVE_LISTS,evm/cuda)
 
 
-use/evm/devel: use/evm/virt use/dev/builder/full
-	@$(call add,LIVE_LISTS,evm/devel)
+use/evm/devel: use/evm use/dev/builder/full
+	@$(call add,BASE_LISTS,evm/devel)
 
 use/evm/virt: use/evm
 	@$(call add,LIVE_LISTS,evm/virtual)

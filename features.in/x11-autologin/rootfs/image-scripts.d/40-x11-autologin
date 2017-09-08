@@ -6,7 +6,7 @@ if [ ! -x /usr/bin/X ]; then
 	exit 0
 fi
 
-USER=altlinux
+USER=devel
 
 add_nopasswdlogin_group()
 {

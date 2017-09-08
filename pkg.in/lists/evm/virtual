@@ -1,10 +1,4 @@
 # Virtualisation and containers
-lxc
-lxc-devel
-lxd
-cgmanager
-lxcfs
-
 qemu
 qemu-user-binfmt_misc
 qemu-user
