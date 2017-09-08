@@ -1,4 +1,4 @@
-use/evm: use/live/hooks use/live/rw +efi use/net \
+use/evm: use/live/hooks use/live/rw +efi use/net-eth/networkd-dhcp \
 	 use/evm/control use/evm/deflogin
 	@$(call add_feature)
 	@$(call add,LIVE_PACKAGES,livecd-save-nfs)
@@ -6,6 +6,7 @@ use/evm: use/live/hooks use/live/rw +efi use/net \
 	@$(call add,THE_KMODULES,nvidia kvm kvm-amd kvm-intel)
 	@$(call set,META_VOL_ID,BSUIR EVM $(IMAGE_NAME)/$(ARCH))
 	@$(call set,META_VOL_SET,BSUIR EVM)
+	@$(call add,NET_ETH,e*:dhcp)
 
 use/evm/control: use/control
 	@$(call add,CONTROL,wireshark-capture:public)
@@ -25,20 +26,26 @@ use/evm/cluster: use/evm
 
 
 use/evm/devel: use/evm use/dev/builder/full
-	@$(call add,BASE_LISTS,evm/devel)
+	@$(call add,LIVE_LISTS,evm/devel)
 
-use/evm/virt: use/evm
+use/evm/virt: use/evm use/lxc/lxd
 	@$(call add,LIVE_LISTS,evm/virtual)
+	@$(call add,LIVE_LISTS,workstation/emulators)
+	@$(call add,LIVE_LISTS,workstation/kvm)
+	@$(call add,LIVE_LISTS,workstation/virtualbox)
 	@$(call add,LIVE_LISTS,openssh)
-	@$(call add,LIVE_PACKAGES,livecd-net-eth)
-	@$(call add,LIVE_PACKAGES,udev-rule-generator-net)
 
-
-use/evm/desktop: use/evm +robotics use/live/ru use/live/install use/live/desktop
+use/evm/desktop: use/evm/cluster use/evm/devel use/evm/virt \
+                 use/live/ru use/live/install use/live/desktop
 #use/evm/desktop: use/evm/cluster use/evm/devel distro/regular-kde4 +robotics use/live/ru
 	@$(call add,LIVE_LISTS, $(call tags,(base || extra) && (archive || network)))
 	@$(call add,LIVE_LISTS,evm/desktop)
 	@$(call add,LIVE_LISTS,evm/games)
 #	@$(call add,LIVE_LISTS,gns3)
 	@$(call add,the_KMODULES,virtualbox)
+	@$(call add,LIVE_LISTS,workstation/graphics-editing)
+	@$(call add,LIVE_LISTS,workstation/scanning)
+	@$(call add,LIVE_LISTS,workstation/libreoffice)
+	@$(call add,LIVE_LISTS,workstation/vlc)
+	@$(call add,LIVE_LISTS,workstation/blender)
 

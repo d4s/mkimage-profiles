@@ -7,6 +7,11 @@ echo Changes for EVM edition
 echo "ZONE=\"Europe/Minsk\"" >> /etc/sysconfig/clock
 cp -f /usr/share/zoneinfo/Europe/Minsk /etc/localtime
 
+# Do not need to shutdown network on network-based workstations or reboot/poweroff
+# In other case shutdoun process will stuck here
+# should not affect LiveCD
+[ -f /lib/systemd/system/network.service ] && \
+  sed -i -e s%"^ExecStop=.*"%"ExecStop=/bin/true"% /lib/systemd/system/network.service
 
 echo Disabling ICMP redirects
 cat <<E_O_F >>/etc/net/sysctl.conf
@@ -29,12 +34,17 @@ E_O_F
 
 chmod 755 /etc/bashrc.d/mpi.sh
 
+XFCE4_CONF=".config/xfce4/xfconf/xfce-perchannel-xml/xfce4-desktop.xml"
+
 # use bash by default (avoid mike's lovely zsh :-E)
 [ -z "$GLOBAL_USERS" ] ||
 	echo "$GLOBAL_USERS" \
 	| tr ' ' '\n' \
 	| while IFS=':' read login passwd admin sudo; do
 		chsh -s "/bin/bash" "$login" ||:
+		# Set neutral picture for XFCE4 background.
+		[ -f /home/devel/$XFCE4_CONF ] && \
+		  sed -i -e s/"slinux_june_2017_1920x1080.jpg"/"vladstudio_aquarium2_1680x1050.jpg"/ /home/devel/$XFCE4_CONF ||:
 	done
 
 # Allow usage of libvirtd for anybody
@@ -64,3 +74,4 @@ E_O_F
 cat <<E_O_F >/etc/sysconfig/desktop
 Xfce4
 E_O_F
+
