@@ -55,7 +55,7 @@ distro/live-evm-desktop: distro/regular-xfce distro/.live-desktop-ru  \
 			 use/live/autologin use/branding \
 			 use/x11/3d
 #			 use/x11/kde4/nm +nm
-#	@$(call set,BRANDING,altlinux-centaurus)
+	@$(call set,BRANDING,simply-linux)
 	@$(call set,KFLAVOURS,std-def)
 #	@$(call set,KFLAVOURS,un-def)
 	@$(call set,RELNAME,EVM-Desktop)
