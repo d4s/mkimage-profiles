@@ -6,7 +6,18 @@ if [ ! -x /usr/bin/X ]; then
 	exit 0
 fi
 
-USER=devel
+# Assume the first global user is a default
+get_default_user(){
+[ -z "$GLOBAL_USERS" ] ||
+	echo "$GLOBAL_USERS" \
+	| tr ' ' '\n' \
+	| while IFS=':' read login passwd admin sudo; do
+	    echo $login
+	done | head -n 1
+}
+
+USER=`get_default_user`
+USER=${USER:-altlinux}
 
 add_nopasswdlogin_group()
 {
