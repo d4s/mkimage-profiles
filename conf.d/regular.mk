@@ -148,7 +148,7 @@ mixin/regular-xfce-sysv: use/init/sysv/polkit use/deflogin/sysv/nm \
 	use/browser/firefox use/browser/firefox/classic \
 	use/browser/firefox/i18n use/browser/firefox/h264 \
 	use/fonts/otf/adobe use/fonts/otf/mozilla
-	@$(call add,THE_PACKAGES,xfce4-mixer pm-utils elinks mpg123)
+	@$(call add,THE_PACKAGES,pnmixer pm-utils elinks mpg123)
 
 distro/regular-xfce-sysv: distro/.regular-sysv-gtk \
 	mixin/regular-xfce mixin/regular-xfce-sysv; @:
@@ -191,12 +191,12 @@ distro/regular-gnome3: distro/.regular-desktop +plymouth +nm \
 	@$(call set,KFLAVOURS,un-def)
 	@$(call add,LIVE_PACKAGES,livecd-gnome3-setup-done)
 	@$(call add,LIVE_PACKAGES,gnome3-regular xcalib templates)
-	@$(call add,LIVE_PACKAGES,gnome-flashback)
+	@$(call add,LIVE_PACKAGES,gnome-flashback screenpen)
 
 # reusable bits
 mixin/regular-tde: +tde \
 	use/syslinux/ui/gfxboot use/browser/firefox/classic use/fonts/ttf/redhat
-	@$(call add,THE_PACKAGES,kdeedu)
+	@$(call add,THE_PACKAGES,kdeedu-kalzium kdeedu-ktouch)
 	@$(call add,DEFAULT_SERVICES_DISABLE,upower bluetoothd)
 
 distro/regular-tde: distro/.regular-desktop mixin/regular-tde +plymouth \
@@ -346,4 +346,18 @@ distro/regular-server-lxd: distro/.regular-bare \
 	@$(call add,DEFAULT_SERVICES_ENABLE,lxd lxc-net lxcfs cgmanager)
 	@$(call add,DEFAULT_SERVICES_ENABLE,getty@tty1 getty@ttyS0)
 	@$(call add,DEFAULT_SERVICES_ENABLE,livecd-net-eth)
+
+distro/regular-engineering: distro/regular-lxde use/live/ru
+	@$(call add,THE_PACKAGES,lxde-settings-lxdesktop)
+	@$(call add,THE_LISTS,$(call tags,engineering desktop))
+	@$(call add,LIVE_LISTS,$(call tags,desktop sane))
+	@$(call add,THE_PACKAGES,LibreOffice LibreOffice-gnome LibreOffice-langpack-ru)
+	@$(call add,THE_PACKAGES,firefox-pepperflash)
+	@$(call add,THE_PACKAGES,cups system-config-printer)
+	@$(call add,THE_PACKAGES,gnome-disk-utility)
+	@$(call add,THE_PACKAGES,evince)
+	@$(call add,LIVE_KMODULES,staging)
+	@$(call add,DEFAULT_SERVICES_ENABLE,cups)
+	@$(call add,DEFAULT_SERVICES_ENABLE,ModemManager)
+
 endif
