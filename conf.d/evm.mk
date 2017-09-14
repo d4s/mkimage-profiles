@@ -12,8 +12,7 @@ distro/.evm_services: use/services
 	@$(call add,SERVICES_ENABLE,livecd-net-eth)
 	@$(call add,SERVICES_DISABLE,livecd-online-repo livecd-tmpfs)
 	@$(call add,SERVICES_DISABLE,bind cups)
-	@$(call add,SERVICES_DISABLE,systemd-journald)
-	@$(call add,SERVICES_DISABLE,livecd-online-repo livecd-tmpfs)
+	@$(call add,SERVICES_DISABLE,mysqld mongod)
 
 distro/.live-evm: distro/.live-base \
 		  use/bootloader/grub \
@@ -55,6 +54,7 @@ distro/live-evm-desktop: distro/regular-xfce distro/.live-desktop-ru  \
 			 use/live/autologin use/branding \
 			 use/x11/3d
 #			 use/x11/kde4/nm +nm
+	@$(call add,SERVICES_DISABLE,pbs_mom distccd)
 	@$(call set,BRANDING,simply-linux)
 	@$(call set,KFLAVOURS,std-def)
 #	@$(call set,KFLAVOURS,un-def)
