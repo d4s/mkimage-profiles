@@ -15,6 +15,10 @@ qt-creator-doc
 #kdevelop-maxi
 kdbg
 kde4sdk-kcachegrind
+nemiver
+
+codeblocks
+codeblocks-contrib
 
 libqt4-devel
 cmake-gui
@@ -39,7 +43,6 @@ djvu-viewer
 #mozilla-plugin-djvu
 
 # net
-tshark
 ^wireshark*
 netvisix
 
@@ -76,6 +79,7 @@ R-doc-html
 maxima-xmaxima
 
 # phys
+python-module-pygtk-libglade
 gresistor
 
 # astro
@@ -93,6 +97,15 @@ synaptic
 
 freemind
 
+avconv
+
 # latex
 texlive-latex-recommended
 texmf-latex-beamer
+
+# maps
+#merkaartor
+#viking
+
+# scratch
+#scratch-full

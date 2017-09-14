@@ -21,3 +21,4 @@ open-ovf
 #virtualbox-guest-*
 virtualbox-guest-additions
 virtualbox-guest-utils
+kernel-modules-virtualbox-std-def

@@ -34,10 +34,13 @@ strace
 strace-utils
 ltrace
 gdb
+cgdb
 valgrind
 valgrind-devel
 oprofile
 gperftools
+
+biew
 
 # Developer
 man-pages
@@ -45,6 +48,10 @@ man-pages-posix
 doxygen
 
 ccache
+distcc
+distcc-server
+
+nasm
 
 # CMake
 cmake
@@ -71,6 +78,7 @@ libgomp-devel
 
 # Libs
 libncurses-devel
+check
 
 # boost
 boost-complete
@@ -96,7 +104,7 @@ python3-dev
 
 # erlang
 erlang-full
-erlang-doc*
+#erlang-doc*
 
 # haskell
 ghc7.6.1
@@ -134,6 +142,8 @@ ntpdate
 rsync
 openssh-server
 
+ipsec-tools
+
 # tools
 sudo
 su
@@ -150,6 +160,7 @@ screen
 tmux
 
 multipath-tools
+lsof
 
 # Correct list for X server
 xinit
@@ -186,4 +197,31 @@ vim-plugin-taglist
 vim-plugin-lh_cpp-ftplugin
 vim-plugin-std_c-syntax
 vim-plugin-CRefVIM
+
+# MQ
+libzeromq
+libzeromq-devel
+
+rabbitmq-server
+librabbitmq-c-devel
+python-module-amqp
+python3-module-amqp
+
+# node.js
+node
+node-gyp
+npm
+
+# DB
+mariadb
+mariadb-server
+mariadb-client
+
+libsqlite3-devel
+python-modules-sqlite3
+python3-modules-sqlite3
+
+mongo
+mongo-tools
+mongo-server-mongod
 

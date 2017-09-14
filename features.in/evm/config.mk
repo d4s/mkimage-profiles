@@ -2,7 +2,7 @@ use/evm: use/live/hooks use/live/rw +efi use/net-eth/networkd-dhcp \
 	 use/evm/control use/evm/deflogin
 	@$(call add_feature)
 	@$(call add,LIVE_PACKAGES,livecd-save-nfs)
-	@$(call add,CLEANUP_PACKAGES,'kernel-modules-drm-nouveau*')
+#	@$(call add,CLEANUP_PACKAGES,'kernel-modules-drm-nouveau*')
 	@$(call add,THE_KMODULES,nvidia kvm kvm-amd kvm-intel)
 	@$(call set,META_VOL_ID,BSUIR EVM $(IMAGE_NAME)/$(ARCH))
 	@$(call set,META_VOL_SET,BSUIR EVM)
@@ -48,4 +48,5 @@ use/evm/desktop: use/evm/cluster use/evm/devel use/evm/virt \
 	@$(call add,LIVE_LISTS,workstation/libreoffice)
 	@$(call add,LIVE_LISTS,workstation/vlc)
 	@$(call add,LIVE_LISTS,workstation/blender)
+	@$(call add,LIVE_LISTS,workstation/freecad)
 
